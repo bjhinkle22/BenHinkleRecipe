@@ -15,25 +15,41 @@ namespace BenHinkleRecipes.Services.VMServices
         {
             RecipeRepoModel recipeRepoModel = new RecipeRepoModel();
 
+            if (recipeVM.RecipePhotoFrontFile == null)
+            {
+                recipeRepoModel.RecipePhotoFront = recipeVM.OriginalRecipeFront;
+            }
+
+            if (recipeVM.RecipePhotoBackFile == null)
+            {
+                recipeRepoModel.RecipePhotoBack = recipeVM.OriginalRecipeBack;
+            }
+
+            if(recipeVM.RecipePhotoFrontFile != null)
+            {
                 MemoryStream mStream = new MemoryStream();
                 recipeVM.RecipePhotoFrontFile.CopyTo(mStream);
                 var frontBytes = mStream.ToArray();
-
+                recipeRepoModel.RecipePhotoFront = frontBytes;
+            }
+            if (recipeVM.RecipePhotoBackFile != null)
+            {
                 MemoryStream mStream1 = new MemoryStream();
                 recipeVM.RecipePhotoBackFile.CopyTo(mStream1);
                 var backBytes = mStream1.ToArray();
-                recipeRepoModel.RecipePhotoFront = frontBytes;
                 recipeRepoModel.RecipePhotoBack = backBytes;
-                recipeRepoModel.Id = recipeVM.RecipeId;
-                recipeRepoModel.RecipeName = recipeVM.RecipeName;
-                recipeRepoModel.Meat = recipeVM.Meat;
-                recipeRepoModel.Veggies = recipeVM.Veggies;
-                recipeRepoModel.Miscellaneous = recipeVM.Miscellaneous;
-                recipeRepoModel.RecipePhotoFrontName = recipeVM.RecipePhotoFrontName;
-                recipeRepoModel.RecipePhotoBackName = recipeVM.RecipePhotoBackName;
-                recipeRepoModel.Description = recipeVM.Description;
 
-                return recipeRepoModel;
+            }
+            recipeRepoModel.Id = recipeVM.RecipeId;
+            recipeRepoModel.RecipeName = recipeVM.RecipeName;
+            recipeRepoModel.Meat = recipeVM.Meat;
+            recipeRepoModel.Veggies = recipeVM.Veggies;
+            recipeRepoModel.Miscellaneous = recipeVM.Miscellaneous;
+            recipeRepoModel.RecipePhotoFrontName = recipeVM.RecipePhotoFrontName;
+            recipeRepoModel.RecipePhotoBackName = recipeVM.RecipePhotoBackName;
+            recipeRepoModel.Description = recipeVM.Description;
+
+            return recipeRepoModel;
         }
         public List<RecipeRepoModel> VMListToRMList(List<RecipeVM> recipeVMs)
         {

@@ -1,0 +1,57 @@
+﻿@using BenHinkleRecipes.Models.ViewModels
+@model RecipeVM
+
+@{
+    ViewData["Title"] = "Edit Recipe";
+}
+<br />
+<form asp-controller="Home" asp-action="UpdateRecipe" method="post" enctype="multipart/form-data">
+    <div class="row">
+    <div class="col-m-2">
+      <label asp-for="RecipeName"></label>
+      <input asp-for="RecipeName" class="form-control" placeholder="Recipe Name">
+      <span asp-validation-for="RecipeName" class="text-danger"></span>
+    </div>
+    <div class="col-m-2">
+    <label asp-for="Meat"></label>
+      <input asp-for="Meat" class="form-control" placeholder="Meats Used">
+    </div>
+    <div class="col-m-2">
+    <label asp-for="Veggies"></label>
+      <input asp-for="Veggies" class="form-control" placeholder="Veggies Used">
+    </div>
+     <div class="col-m-2">
+    <label asp-for="Miscellaneous"></label>
+      <input asp-for="Miscellaneous" class="form-control" placeholder="Miscellaneous Used">
+    </div>
+    <br />
+    <div class="col-m-2">
+    <label asp-for="Description"></label>
+      <input asp-for="Description" class="form-control" placeholder="Recipe Description">
+    </div>
+     <div class="col-m-2">
+    <label asp-for="RecipePhotoFrontName"></label>
+      <input asp-for="RecipePhotoFrontName" class="form-control" placeholder="Recipe Photo Front Name">
+    </div>
+    <div class="col-m-2">
+      <label asp-for="RecipePhotoFrontFile" class="form-label">Upload Picture of Recipe Front</label>
+      <input asp-for="RecipePhotoFrontFile" class="form-control" id="recipePhotoFrontUpload">
+    </div>
+        <div class="col-m-2">
+            <label asp-for="RecipePhotoBackName"></label>
+            <input asp-for="RecipePhotoBackName" class="form-control" placeholder="Recipe Photo Front Name">
+            <label asp-for="RecipePhotoBackFile" class="form-label">Upload Picture of Recipe Back</label>
+            <input asp-for="RecipePhotoBackFile" class="form-control" id="recipePhotobackUpload">
+        </div>
+    <input asp-for="RecipeId">
+    <input asp-for="OriginalRecipeFront" type="hidden">
+    <input asp-for="OriginalRecipeBack" type="hidden">
+  </div>
+  <br />
+  <button class="btn btn-success">Save</button>
+</form>
+
+
+
+
+

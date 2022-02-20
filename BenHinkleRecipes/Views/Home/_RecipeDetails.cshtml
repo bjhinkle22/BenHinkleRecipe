@@ -1,0 +1,30 @@
+﻿@using BenHinkleRecipes.Models.ViewModels
+@model RecipeVM
+
+@{
+    ViewData["Title"] = "Recipe Details";
+}
+
+<br />
+<form asp-action="DeleteRecipe" asp-controller="Home" asp-route-id="@Model.RecipeId" method="post">
+    <div data-role="recipe" class="card mb-3" style="display: inline-block">
+        <img class="card-img-top" src="@Model.RecipeBackDisplay" asp-append-version="true">
+        <div id="recipeCardsBody" class="card-body text-primary">
+            <h5 id="recipeCardsTitle" class="card-title">@Model.RecipeName</h5>
+            <p id="recipeCardsDescription" class="card-text">@Model.Description</p>
+            <p id="recipeCardsMeat" class="card-text">@Model.Meat</p>
+            <p id="recipeCardsVeggies" class="card-text">@Model.Veggies</p>
+            <p id="recipeCardsMisc" class="card-text">@Model.Miscellaneous</p>
+            @Html.ActionLink("Edit", "UpdateRecipe", "Home",new { id = @Model.RecipeId }, new { @class="btn btn-primary"})
+            <span id="deleteSpan_@Model.RecipeId">
+                <a href="#deleteSpan_@Model.RecipeId" onclick="confirmDelete('@Model.RecipeId', true)" class="btn btn-danger">Delete</a>
+            </span>
+            <span id="confirmDeleteSpan_@Model.RecipeId" style="display:none">
+                <button type="submit" class="btn btn-danger" )">Yes</button>
+                <a href="#" onclick="confirmDelete('@Model.RecipeId', false)" class="btn btn-primary">No</a>
+                <br />
+                <span>Are you sure you want to delete?</span>
+            </span>
+        </div>
+    </div>
+</form>

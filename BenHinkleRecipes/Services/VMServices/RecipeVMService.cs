@@ -45,8 +45,6 @@ namespace BenHinkleRecipes.Services.VMServices
             recipeRepoModel.Meat = recipeVM.Meat;
             recipeRepoModel.Veggies = recipeVM.Veggies;
             recipeRepoModel.Miscellaneous = recipeVM.Miscellaneous;
-            recipeRepoModel.RecipePhotoFrontName = recipeVM.RecipePhotoFrontName;
-            recipeRepoModel.RecipePhotoBackName = recipeVM.RecipePhotoBackName;
             recipeRepoModel.Description = recipeVM.Description;
 
             return recipeRepoModel;
@@ -70,8 +68,6 @@ namespace BenHinkleRecipes.Services.VMServices
 
             recipeVM.RecipeFrontDisplay = string.Format("data:image/jpg;base64,{0}", base64Front);
             recipeVM.RecipeBackDisplay = string.Format("data:image/jpg;base64,{0}", base64Back);
-            recipeVM.RecipePhotoFrontName = recipeRepoModel.RecipePhotoFrontName;
-            recipeVM.RecipePhotoBackName = recipeRepoModel.RecipePhotoBackName;
             recipeVM.RecipeId = recipeRepoModel.Id;
             recipeVM.RecipeName = recipeRepoModel.RecipeName;
             recipeVM.Meat = recipeRepoModel.Meat;

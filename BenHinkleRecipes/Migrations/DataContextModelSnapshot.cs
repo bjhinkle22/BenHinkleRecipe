@@ -45,17 +45,11 @@ namespace BenHinkleRecipes.Migrations
                     b.Property<string>("RecipeName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("RecipePhotoBackBytes")
+                    b.Property<byte[]>("RecipePhotoBack")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("RecipePhotoBackName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("RecipePhotoFrontBytes")
+                    b.Property<byte[]>("RecipePhotoFront")
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("RecipePhotoFrontName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Veggies")
                         .HasColumnType("nvarchar(max)");

@@ -1,4 +1,6 @@
-﻿namespace BenHinkleRecipes.Models.RepoModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BenHinkleRecipes.Models.RepoModels
 {
     public class RecipeRepoModel
     {
@@ -7,11 +9,11 @@
         public string? Meat { get; set; }
         public string? Veggies { get; set; }
         public string? Miscellaneous { get; set; }
-        public bool? IsFavorite { get; set; }
         public string? Description { get; set; }
-        public string? RecipePhotoFrontName { get; set; }
-        public string? RecipePhotoBackName { get; set; }
+        public bool? IsFavorite { get; set; }
+        [MaxLength]
         public byte[]? RecipePhotoFront { get; set; }
+        [MaxLength]
         public byte[]? RecipePhotoBack { get; set; }
     }
 }

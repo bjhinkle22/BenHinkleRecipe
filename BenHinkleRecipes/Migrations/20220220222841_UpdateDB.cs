@@ -4,7 +4,7 @@
 
 namespace BenHinkleRecipes.Migrations
 {
-    public partial class UpdateToByteArrayss : Migration
+    public partial class UpdateDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

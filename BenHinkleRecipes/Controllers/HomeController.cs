@@ -29,8 +29,6 @@ namespace BenHinkleRecipes.Controllers
             var recipeRequest = _recipeService.GetRecipes();
             var recipeResponse = _recipeVMService.RMListToVMList(recipeRequest);
             return View("Recipes", recipeResponse);
-
-            return View("Index");
         }
 
         [HttpGet]
@@ -69,8 +67,6 @@ namespace BenHinkleRecipes.Controllers
         {
             var recipeRequest = _recipeVMService.VMtoRM(request);
             var recipeResponse = _recipeService.UpdateRecipe(recipeRequest);
-
-
             var updatedRecipe = _recipeService.GetRecipe(request.RecipeId);
             var recipeResult = _recipeVMService.RMtoVM(updatedRecipe);
 

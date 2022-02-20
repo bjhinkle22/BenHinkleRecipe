@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BenHinkleRecipes.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220220180707_UpdateToByteArrays")]
-    partial class UpdateToByteArrays
+    [Migration("20220220222841_UpdateDB")]
+    partial class UpdateDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,17 +47,11 @@ namespace BenHinkleRecipes.Migrations
                     b.Property<string>("RecipeName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("RecipePhotoBackBytes")
+                    b.Property<byte[]>("RecipePhotoBack")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("RecipePhotoBackName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("RecipePhotoFrontBytes")
+                    b.Property<byte[]>("RecipePhotoFront")
                         .HasColumnType("varbinary(max)");
-
-                    b.Property<string>("RecipePhotoFrontName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Veggies")
                         .HasColumnType("nvarchar(max)");

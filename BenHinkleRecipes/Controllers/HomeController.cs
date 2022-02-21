@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Diagnostics;
 using System;
+using Microsoft.AspNetCore.Identity;
 
 namespace BenHinkleRecipes.Controllers
 {
@@ -13,17 +14,48 @@ namespace BenHinkleRecipes.Controllers
     {
         private readonly IRecipeService _recipeService;
         private readonly IRecipeVMService _recipeVMService;
+        IUserFavoriteService _userFavoriteService;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public HomeController(IRecipeService recipeService, IRecipeVMService recipeVMService)
+        public HomeController(IRecipeService recipeService, IRecipeVMService recipeVMService, UserManager<IdentityUser> userManager, IUserFavoriteService userFavoriteService)
         {
             _recipeVMService = recipeVMService;
             _recipeService = recipeService;
+            _userManager = userManager;
+            _userFavoriteService = userFavoriteService;
         }
 
         public IActionResult Index()
         {
-            var recipeRequest = _recipeService.GetRecipes();
-            var recipeResponse = _recipeVMService.RMListToVMList(recipeRequest);
+            var userName = HttpContext.User.Identity.Name;
+            if(userName == null)
+            {
+                var anonymousRecipes = _recipeService.GetRecipes();
+                var anonymousRecipesResponse = _recipeVMService.RMListToVMList(anonymousRecipes);
+                return View("Recipes", anonymousRecipesResponse);
+            }
+            //Get Current User List of Favorites
+            var userFavorites = _userFavoriteService.GetFavoriteRecipes(userName);
+
+            List<int> favorites = userFavorites.Select(x => x.recipe_id).ToList();
+
+            var allRecipes = _recipeService.GetRecipes();
+            var recipeResponse = _recipeVMService.RMListToVMList(allRecipes);
+
+            var favoriteRecipes = new List<RecipeVM>();
+
+            foreach (RecipeVM recipe in recipeResponse)
+            {
+                for (int i = 0; i < favorites.Count; i++)
+                {
+                    int test = favorites[i];
+                    if (recipe.RecipeId == favorites[i])
+                    {
+                        recipe.IsFavorite = true;
+                        favoriteRecipes.Add(recipe);
+                    }
+                }
+            }
             return View("Recipes", recipeResponse);
         }
 
@@ -77,14 +109,38 @@ namespace BenHinkleRecipes.Controllers
         }
         public ActionResult<RecipeVM> GetFavoriteRecipes()
         {
-            var recipeRequest = _recipeService.GetFavoriteRecipes();
-            var recipeResponse = _recipeVMService.RMListToVMList(recipeRequest);
-            return View("Recipes", recipeResponse);
+            //Get current UserName
+           var userName = HttpContext.User.Identity.Name;
+
+            //Get Current User List of Favorites
+            var userFavorites = _userFavoriteService.GetFavoriteRecipes(userName);
+
+            List<int> favorites = userFavorites.Select(x => x.recipe_id).ToList();
+
+            var allRecipes = _recipeService.GetRecipes();
+            var recipeResponse = _recipeVMService.RMListToVMList(allRecipes);
+
+            var favoriteRecipes = new List<RecipeVM>();
+
+            foreach (RecipeVM recipe in recipeResponse)
+            {
+               for(int i = 0; i < favorites.Count; i++)
+                {
+                    int test = favorites[i];
+                    if(recipe.RecipeId == favorites[i])
+                    {
+                        recipe.IsFavorite = true;
+                        favoriteRecipes.Add(recipe);
+                    }
+                }
+            }
+
+            return View("Recipes", favoriteRecipes);
         }
 
         public void SetFavorite(int recipeId, bool check)
         {
-            _recipeService.SetFavorite(recipeId, check);
+
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

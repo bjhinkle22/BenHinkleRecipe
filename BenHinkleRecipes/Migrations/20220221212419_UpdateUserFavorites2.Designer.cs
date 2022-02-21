@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BenHinkleRecipes.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220220222841_UpdateDB")]
-    partial class UpdateDB
+    [Migration("20220221212419_UpdateUserFavorites2")]
+    partial class UpdateUserFavorites2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -35,7 +35,7 @@ namespace BenHinkleRecipes.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("IsFavorite")
+                    b.Property<bool>("IsFavorite")
                         .HasColumnType("bit");
 
                     b.Property<string>("Meat")
@@ -59,6 +59,19 @@ namespace BenHinkleRecipes.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Recipes");
+                });
+
+            modelBuilder.Entity("BenHinkleRecipes.Models.RepoModels.UserFavoriteRepoModel", b =>
+                {
+                    b.Property<int>("RecipeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("RecipeId", "UserId");
+
+                    b.ToTable("UserFavorites");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

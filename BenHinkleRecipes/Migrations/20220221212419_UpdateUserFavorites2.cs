@@ -4,7 +4,7 @@
 
 namespace BenHinkleRecipes.Migrations
 {
-    public partial class UpdateDB : Migration
+    public partial class UpdateUserFavorites2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -24,26 +24,32 @@ namespace BenHinkleRecipes.Controllers
             _userManager = userManager;
             _userFavoriteService = userFavoriteService;
         }
-
         public IActionResult Index()
         {
+            //Get current username check null, return All Recipes without doing work if null.
             var userName = HttpContext.User.Identity.Name;
+
             if(userName == null)
             {
                 var anonymousRecipes = _recipeService.GetRecipes();
                 var anonymousRecipesResponse = _recipeVMService.RMListToVMList(anonymousRecipes);
                 return View("Recipes", anonymousRecipesResponse);
             }
+
             //Get Current User List of Favorites
             var userFavorites = _userFavoriteService.GetFavoriteRecipes(userName);
 
+            //Select list of RecipeIDs from list of User's Favorite
             List<int> favorites = userFavorites.Select(x => x.recipe_id).ToList();
 
+
+            //Get All Recipes
             var allRecipes = _recipeService.GetRecipes();
+
+            //Convert Repo Model to ViewModel
             var recipeResponse = _recipeVMService.RMListToVMList(allRecipes);
 
-            var favoriteRecipes = new List<RecipeVM>();
-
+            //do work to assign favorite to user's favorite recipe
             foreach (RecipeVM recipe in recipeResponse)
             {
                 for (int i = 0; i < favorites.Count; i++)
@@ -52,7 +58,6 @@ namespace BenHinkleRecipes.Controllers
                     if (recipe.RecipeId == favorites[i])
                     {
                         recipe.IsFavorite = true;
-                        favoriteRecipes.Add(recipe);
                     }
                 }
             }

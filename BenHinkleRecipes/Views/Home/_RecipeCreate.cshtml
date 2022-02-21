@@ -38,9 +38,13 @@
             <input asp-for="RecipePhotoBackFile" class="form-control" id="recipePhotobackUpload">
         </div>
         <input asp-for="RecipeId">
-        <div class="col-m-2">
-            <input asp-for="IsFavorite" type="checkbox" class=star>
-        </div>
+        @if (ViewContext.HttpContext.User.Identity.Name != null)
+        {
+            <input asp-for="IsFavorite" type="checkbox" class=star onclick="UpdateRecipe(this)" data-recipeid="@Model.RecipeId">
+            <br />
+            <br />
+
+        }
     </div>
     <br />
     <button class="btn btn-success">Create</button>

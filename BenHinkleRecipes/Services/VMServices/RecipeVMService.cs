@@ -14,12 +14,10 @@ namespace BenHinkleRecipes.Services.VMServices
             {
                 recipeRepoModel.RecipePhotoFront = recipeVM.OriginalRecipeFront;
             }
-
             if (recipeVM.RecipePhotoBackFile == null)
             {
                 recipeRepoModel.RecipePhotoBack = recipeVM.OriginalRecipeBack;
             }
-
             if (recipeVM.RecipePhotoFrontFile != null)
             {
                 MemoryStream mStream = new();
@@ -33,7 +31,6 @@ namespace BenHinkleRecipes.Services.VMServices
                 recipeVM.RecipePhotoBackFile.CopyTo(mStream1);
                 var backBytes = mStream1.ToArray();
                 recipeRepoModel.RecipePhotoBack = backBytes;
-
             }
             recipeRepoModel.Id = recipeVM.RecipeId;
             recipeRepoModel.RecipeName = recipeVM.RecipeName;

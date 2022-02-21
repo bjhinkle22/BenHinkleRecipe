@@ -18,17 +18,13 @@ namespace BenHinkleRecipes.Models.ViewModels
         public string? Meat { get; set; }
         public string? Veggies { get; set; }
         public string? Miscellaneous { get; set; }
-
         [DisplayName("Upload Front of Recipe Photo")]
         public IFormFile? RecipePhotoFrontFile { get; set; }
-
         [DisplayName("Upload Back of Recipe Photo")]
         public IFormFile? RecipePhotoBackFile { get; set; }
         public string? Description { get; set; }
         public bool? IsFavorite { get; set; }
-
         public string? RecipeFrontDisplay { get; set; }
-
         public string? RecipeBackDisplay { get; set; }
         [HiddenInput]
         public byte[]? OriginalRecipeFront { get; set; }

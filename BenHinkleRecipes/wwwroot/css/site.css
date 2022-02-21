@@ -71,6 +71,23 @@ body {
     height:3rem;
 }
 
+.star {
+    visibility: hidden;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+    .star:before {
+        content: "\2605";
+        position: absolute;
+        visibility: visible;
+    }
+
+    .star:checked:before {
+        content: "\2606";
+        position: absolute;
+    }
+
 @media (min-width: 34em) {
     .card-columns {
         -webkit-column-count: 2;

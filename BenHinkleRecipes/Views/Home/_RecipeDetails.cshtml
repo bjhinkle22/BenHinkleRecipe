@@ -15,6 +15,12 @@
             <p id="recipeCardsMeat" class="card-text">@Model.Meat</p>
             <p id="recipeCardsVeggies" class="card-text">@Model.Veggies</p>
             <p id="recipeCardsMisc" class="card-text">@Model.Miscellaneous</p>
+             <br />
+            <div class="col-m-2">
+                <input asp-for="@Model.IsFavorite" type="checkbox" class=star onclick="UpdateRecipe(this)" data-recipeid = "@Model.RecipeId">
+            </div>
+             <br />
+              <br />
             @Html.ActionLink("Edit", "UpdateRecipe", "Home",new { id = @Model.RecipeId }, new { @class="btn btn-primary"})
             <span id="deleteSpan_@Model.RecipeId">
                 <a href="#deleteSpan_@Model.RecipeId" onclick="confirmDelete('@Model.RecipeId', true)" class="btn btn-danger">Delete</a>
@@ -28,3 +34,15 @@
         </div>
     </div>
 </form>
+
+<script>
+        function UpdateRecipe(elem) {
+        var isDone = $(elem).is(':checked');
+        var rid = $(elem).data('recipeid');
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SetFavorite", "Home")',
+            data: { check: isDone,recipeid:rid }
+        });
+    }
+</script>

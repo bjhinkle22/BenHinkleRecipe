@@ -41,5 +41,11 @@ namespace BenHinkleRecipes.Services
         {
             _recipeRepo.DeleteRecipe(id);
         }
+        public void SetFavorite(int id, bool isFavorite)
+        {
+            RecipeRepoModel recipe = _recipeRepo.GetRecipe(id);
+            recipe.IsFavorite = isFavorite;
+            _recipeRepo.UpdateRecipe(recipe);
+        }
     }
 }

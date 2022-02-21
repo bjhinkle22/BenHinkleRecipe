@@ -9,6 +9,7 @@ namespace BenHinkleRecipes.Interfaces.ServiceInterfaces
         RecipeRepoModel GetRecipe(int id);
         RecipeRepoModel InsertRecipe(RecipeRepoModel recipe);
         void DeleteRecipe(int id);
+        void SetFavorite(int id, bool isFavorite);
         RecipeRepoModel UpdateRecipe(RecipeRepoModel recipe);
     }
 }

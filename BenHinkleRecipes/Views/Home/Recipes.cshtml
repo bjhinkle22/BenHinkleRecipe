@@ -21,9 +21,9 @@
                 <div id="recipeCardsBody" class="card-body text-primary">
                     <h5 id="recipeCardsTitle" class="card-title">@Html.DisplayFor(m => element.RecipeName)</h5>
                     <p id="recipeCardsDescription" class="card-text">@Html.DisplayFor(m => element.Description)</p>
-                     <input asp-for="@element.IsFavorite" type="checkbox" class=star>
-                        <br />
-                       <br />
+                    <input asp-for="@element.IsFavorite" type="checkbox" class=star onclick="UpdateRecipe(this)" data-recipeid = "@element.RecipeId">
+                    <br />
+                    <br />
                     @Html.ActionLink("Details","GetRecipeById", "Home", new { id = element.RecipeId }, new { @class="btn btn-info"})
                     @Html.ActionLink("Edit", "UpdateRecipe", "Home",new { id = element.RecipeId }, new { @class="btn btn-primary"})
                     <span id="deleteSpan_@element.RecipeId">
@@ -35,7 +35,7 @@
                         <br />
                         <span>Are you sure you want to delete?</span>
                     </span>
-                     
+
                 </div>
             </div>
         </form>
@@ -43,3 +43,16 @@
 </div>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/js/site.js"></script>
+
+
+<script>
+        function UpdateRecipe(elem) {
+        var isDone = $(elem).is(':checked');
+        var rid = $(elem).data('recipeid');
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SetFavorite", "Home")',
+            data: { check: isDone,recipeid:rid }
+        });
+    }
+</script>

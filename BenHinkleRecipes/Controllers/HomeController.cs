@@ -82,6 +82,11 @@ namespace BenHinkleRecipes.Controllers
             return View("Recipes", recipeResponse);
         }
 
+        public void SetFavorite(int recipeId, bool check)
+        {
+            _recipeService.SetFavorite(recipeId, check);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

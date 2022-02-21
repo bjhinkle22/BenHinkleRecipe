@@ -10,7 +10,7 @@ namespace BenHinkleRecipes.Models.RepoModels
         public string? Veggies { get; set; }
         public string? Miscellaneous { get; set; }
         public string? Description { get; set; }
-        public bool? IsFavorite { get; set; }
+        public bool IsFavorite { get; set; }
         [MaxLength]
         public byte[]? RecipePhotoFront { get; set; }
         [MaxLength]

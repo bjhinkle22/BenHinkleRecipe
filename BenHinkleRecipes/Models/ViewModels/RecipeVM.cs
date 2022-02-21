@@ -23,7 +23,7 @@ namespace BenHinkleRecipes.Models.ViewModels
         [DisplayName("Upload Back of Recipe Photo")]
         public IFormFile? RecipePhotoBackFile { get; set; }
         public string? Description { get; set; }
-        public bool? IsFavorite { get; set; }
+        public bool IsFavorite { get; set; }
         public string? RecipeFrontDisplay { get; set; }
         public string? RecipeBackDisplay { get; set; }
         [HiddenInput]

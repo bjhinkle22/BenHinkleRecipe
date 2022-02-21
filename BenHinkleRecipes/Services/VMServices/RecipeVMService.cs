@@ -38,6 +38,7 @@ namespace BenHinkleRecipes.Services.VMServices
             recipeRepoModel.Veggies = recipeVM.Veggies;
             recipeRepoModel.Miscellaneous = recipeVM.Miscellaneous;
             recipeRepoModel.Description = recipeVM.Description;
+            recipeRepoModel.IsFavorite = recipeVM.IsFavorite;
 
             return recipeRepoModel;
         }
@@ -68,6 +69,7 @@ namespace BenHinkleRecipes.Services.VMServices
             recipeVM.Description = recipeRepoModel.Description;
             recipeVM.OriginalRecipeFront = recipeRepoModel.RecipePhotoFront;
             recipeVM.OriginalRecipeBack = recipeRepoModel.RecipePhotoBack;
+            recipeVM.IsFavorite = recipeRepoModel.IsFavorite;
 
             return recipeVM;
         }

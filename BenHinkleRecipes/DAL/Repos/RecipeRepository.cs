@@ -20,6 +20,10 @@ namespace BenHinkleRecipes.DAL.Repos
         {
             return _context.Recipes.Find(id);
         }
+        public IEnumerable<RecipeRepoModel> GetFavoriteRecipes()
+        {
+            return _context.Recipes.Where(predicate => predicate.IsFavorite).ToList();
+        }
         public void InsertRecipe(RecipeRepoModel recipe)
         {
             _context.Recipes.Add(recipe);

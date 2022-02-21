@@ -17,6 +17,11 @@ namespace BenHinkleRecipes.Services
             List<RecipeRepoModel> recipes = _recipeRepo.GetRecipes().ToList();
             return recipes;
         }
+        public List<RecipeRepoModel> GetFavoriteRecipes()
+        {
+            List<RecipeRepoModel> recipes = _recipeRepo.GetFavoriteRecipes().ToList();
+            return recipes;
+        }
         public RecipeRepoModel GetRecipe(int id)
         {
             RecipeRepoModel recipe = _recipeRepo.GetRecipe(id);

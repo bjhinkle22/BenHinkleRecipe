@@ -77,7 +77,7 @@ namespace BenHinkleRecipes.Controllers
         }
         public ActionResult<RecipeVM> GetFavoriteRecipes()
         {
-            var recipeRequest = _recipeService.GetRecipes();
+            var recipeRequest = _recipeService.GetFavoriteRecipes();
             var recipeResponse = _recipeVMService.RMListToVMList(recipeRequest);
             return View("Recipes", recipeResponse);
         }

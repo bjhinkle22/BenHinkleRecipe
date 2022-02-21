@@ -61,13 +61,11 @@ namespace BenHinkleRecipes.Migrations
 
             modelBuilder.Entity("BenHinkleRecipes.Models.RepoModels.UserFavoriteRepoModel", b =>
                 {
-                    b.Property<int>("RecipeId")
+                    b.Property<int>("recipe_id")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("RecipeId", "UserId");
+                    b.Property<string>("userName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.ToTable("UserFavorites");
                 });

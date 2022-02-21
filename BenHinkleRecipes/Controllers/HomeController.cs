@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System;
 using Microsoft.AspNetCore.Identity;
+using BenHinkleRecipes.Models.RepoModels;
 
 namespace BenHinkleRecipes.Controllers
 {
@@ -26,14 +27,18 @@ namespace BenHinkleRecipes.Controllers
         }
         public IActionResult Index()
         {
+            //Get All Recipes
+            var allRecipes = _recipeService.GetRecipes();
+
+            //Convert List of Repo Models to  List of ViewModels
+            var recipeResponse = _recipeVMService.RMListToVMList(allRecipes);
+
             //Get current username check null, return All Recipes without doing work if null.
             var userName = HttpContext.User.Identity.Name;
 
             if(userName == null)
             {
-                var anonymousRecipes = _recipeService.GetRecipes();
-                var anonymousRecipesResponse = _recipeVMService.RMListToVMList(anonymousRecipes);
-                return View("Recipes", anonymousRecipesResponse);
+                return View("Recipes", recipeResponse);
             }
 
             //Get Current User List of Favorites
@@ -41,13 +46,6 @@ namespace BenHinkleRecipes.Controllers
 
             //Select list of RecipeIDs from list of User's Favorite
             List<int> favorites = userFavorites.Select(x => x.recipe_id).ToList();
-
-
-            //Get All Recipes
-            var allRecipes = _recipeService.GetRecipes();
-
-            //Convert Repo Model to ViewModel
-            var recipeResponse = _recipeVMService.RMListToVMList(allRecipes);
 
             //do work to assign favorite to user's favorite recipe
             foreach (RecipeVM recipe in recipeResponse)
@@ -67,11 +65,38 @@ namespace BenHinkleRecipes.Controllers
         [HttpGet]
         public ActionResult<RecipeVM> GetRecipeById(int id)
         {
+            //Get Recipe by Id
             var recipeRequest = _recipeService.GetRecipe(id);
+
+
+            //Convert Repo Model to View Model
             var recipeResult = _recipeVMService.RMtoVM(recipeRequest);
 
+            //Get current username check null, return All Recipes without doing work if null.
+            var userName = HttpContext.User.Identity.Name;
+
+            if (userName == null)
+            {
+                return View("_RecipeDetails", recipeResult);
+            }
+            //Get Current User List of Favorites
+            var userFavorites = _userFavoriteService.GetFavoriteRecipes(userName);
+
+            //Select list of RecipeIDs from list of User's Favorite
+            List<int> favorites = userFavorites.Select(x => x.recipe_id).ToList();
+
+            //Assing IsFavorite to Appropriate Recipes
+            for (int i = 0; i < favorites.Count; i++)
+            {
+                int test = favorites[i];
+                if (recipeResult.RecipeId == favorites[i])
+                {
+                    recipeResult.IsFavorite = true;
+                }
+            }
             return View("_RecipeDetails", recipeResult);
         }
+
         [HttpGet]
         public ActionResult<RecipeVM> CreateRecipe()
         {
@@ -80,9 +105,19 @@ namespace BenHinkleRecipes.Controllers
         [HttpPost]
         public ActionResult<RecipeVM> CreateRecipe(RecipeVM request)
         {
+          
             var recipeRequest = _recipeVMService.VMtoRM(request);
             var recipeResponse = _recipeService.InsertRecipe(recipeRequest);
             var recipeVM = _recipeVMService.RMtoVM(recipeResponse);
+
+            //Check if user checked Favorite & UserName isn't null
+            if (request.IsFavorite == true && HttpContext.User.Identity.Name != null)
+            {
+                //Call Add UserFavorite
+                _userFavoriteService.InsertFavoriteRecipe(HttpContext.User.Identity.Name, recipeVM.RecipeId);
+                recipeVM.IsFavorite = true;
+            }
+
             return View("_RecipeDetails", recipeVM);
         }
 
@@ -139,7 +174,6 @@ namespace BenHinkleRecipes.Controllers
                     }
                 }
             }
-
             return View("Recipes", favoriteRecipes);
         }
 

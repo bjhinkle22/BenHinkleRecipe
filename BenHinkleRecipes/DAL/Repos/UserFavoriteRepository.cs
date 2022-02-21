@@ -16,27 +16,45 @@ namespace BenHinkleRecipes.DAL.Repos
         {
             return _context.UserFavorites.Where(u => u.userName == userName);
         }
-        public void InsertFavoriteRecipe(string currentUserId, int recipeId)
+        public void InsertFavoriteRecipe(string userName, int recipeId)
         {
-            throw new NotImplementedException();
+            UserFavoriteRepoModel favorite = new UserFavoriteRepoModel();
+            favorite.userName = userName;
+            favorite.recipe_id = recipeId;
+            _context.UserFavorites.Add(favorite);
+            Save();
         }
-        public void UpdateRecipe(string currentUserId, int recipeId)
+        public void UpdateRecipe(string userName, int recipeId)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteFavoriteRecipe(string currentUserId, int recipeId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispose()
+        public void DeleteFavoriteRecipe(string userName, int recipeId)
         {
             throw new NotImplementedException();
         }
         public void Save()
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

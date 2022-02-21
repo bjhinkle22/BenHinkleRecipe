@@ -17,15 +17,15 @@ namespace BenHinkleRecipes.Services
             List<UserFavoriteRepoModel> userFavorites = _userFavoriteRepository.GetFavoriteRecipes(userName).ToList();
             return userFavorites;
         }
-        public void InsertFavoriteRecipe(string currentUserId, int recipeId)
+        public void InsertFavoriteRecipe(string userName, int recipeId)
+        {
+            _userFavoriteRepository.InsertFavoriteRecipe(userName, recipeId);
+        }
+        public void UpdateRecipe(string userName, int recipeId)
         {
             throw new NotImplementedException();
         }
-        public void UpdateRecipe(string currentUserId, int recipeId)
-        {
-            throw new NotImplementedException();
-        }
-        public void DeleteFavoriteRecipe(string currentUserId, int recipeId)
+        public void DeleteFavoriteRecipe(string userName, int recipeId)
         {
             throw new NotImplementedException();
         }

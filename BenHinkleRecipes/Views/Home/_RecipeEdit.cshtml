@@ -38,17 +38,17 @@
             <input asp-for="RecipePhotoBackFile" class="form-control" id="recipePhotobackUpload">
         </div>
         <input asp-for="RecipeId">
-        <input asp-for="OriginalRecipeFront" >
-        <input asp-for="OriginalRecipeBack" >
+        <input asp-for="OriginalRecipeFront">
+        <input asp-for="OriginalRecipeBack">
     </div>
-     <div class="col-m-2">
-    <input asp-for="IsFavorite" type="checkbox" class=star>
-     </div>
+    <div class="col-m-2">
+        <input asp-for="IsFavorite" type="checkbox" class=star>
+    </div>
     <br />
     <button class="btn btn-success">Save</button>
 </form>
 <br />
-    <input type="button" class="btn btn-secondary" value="Cancel" onclick="location.href='@Url.Action("Index","Home")';" />
+<input type="button" class="btn btn-secondary" value="Cancel" onclick="location.href='@Url.Action("Index","Home")';" />
 
 
 

@@ -11,17 +11,13 @@ namespace BenHinkleRecipes.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IRecipeService _recipeService;
         private readonly IRecipeVMService _recipeVMService;
-        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public HomeController(ILogger<HomeController> logger, IRecipeService recipeService, IRecipeVMService recipeVMService, IWebHostEnvironment hostEnvironment)
+        public HomeController(IRecipeService recipeService, IRecipeVMService recipeVMService)
         {
             _recipeVMService = recipeVMService;
-            _hostEnvironment = hostEnvironment;
             _recipeService = recipeService;
-            _logger = logger;
         }
 
         public IActionResult Index()
@@ -66,7 +62,7 @@ namespace BenHinkleRecipes.Controllers
         public ActionResult<RecipeVM> UpdateRecipe(RecipeVM request)
         {
             var recipeRequest = _recipeVMService.VMtoRM(request);
-            var recipeResponse = _recipeService.UpdateRecipe(recipeRequest);
+            _recipeService.UpdateRecipe(recipeRequest);
             var updatedRecipe = _recipeService.GetRecipe(request.RecipeId);
             var recipeResult = _recipeVMService.RMtoVM(updatedRecipe);
 
@@ -79,7 +75,7 @@ namespace BenHinkleRecipes.Controllers
             _recipeService.DeleteRecipe(id);
             return RedirectToAction("Index");
         }
-        public ActionResult<RecipeVM> GetFavoriteRecipes(int id)
+        public ActionResult<RecipeVM> GetFavoriteRecipes()
         {
             var recipeRequest = _recipeService.GetRecipes();
             var recipeResponse = _recipeVMService.RMListToVMList(recipeRequest);

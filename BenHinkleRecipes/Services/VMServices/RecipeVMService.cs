@@ -6,14 +6,9 @@ namespace BenHinkleRecipes.Services.VMServices
 {
     public class RecipeVMService : IRecipeVMService
     {
-        private readonly IRecipeService _recipeService;
-        public RecipeVMService(IRecipeService recipeService)
-        {
-            _recipeService = recipeService;
-        }
         public RecipeRepoModel VMtoRM(RecipeVM recipeVM)
         {
-            RecipeRepoModel recipeRepoModel = new RecipeRepoModel();
+            RecipeRepoModel recipeRepoModel = new();
 
             if (recipeVM.RecipePhotoFrontFile == null)
             {
@@ -25,16 +20,16 @@ namespace BenHinkleRecipes.Services.VMServices
                 recipeRepoModel.RecipePhotoBack = recipeVM.OriginalRecipeBack;
             }
 
-            if(recipeVM.RecipePhotoFrontFile != null)
+            if (recipeVM.RecipePhotoFrontFile != null)
             {
-                MemoryStream mStream = new MemoryStream();
+                MemoryStream mStream = new();
                 recipeVM.RecipePhotoFrontFile.CopyTo(mStream);
                 var frontBytes = mStream.ToArray();
                 recipeRepoModel.RecipePhotoFront = frontBytes;
             }
             if (recipeVM.RecipePhotoBackFile != null)
             {
-                MemoryStream mStream1 = new MemoryStream();
+                MemoryStream mStream1 = new();
                 recipeVM.RecipePhotoBackFile.CopyTo(mStream1);
                 var backBytes = mStream1.ToArray();
                 recipeRepoModel.RecipePhotoBack = backBytes;
@@ -51,7 +46,7 @@ namespace BenHinkleRecipes.Services.VMServices
         }
         public List<RecipeRepoModel> VMListToRMList(List<RecipeVM> recipeVMs)
         {
-            List<RecipeRepoModel> recipeRepos = new List<RecipeRepoModel>();
+            List<RecipeRepoModel> recipeRepos = new();
 
             foreach (RecipeVM recipe in recipeVMs)
             {
@@ -61,7 +56,7 @@ namespace BenHinkleRecipes.Services.VMServices
         }
         public RecipeVM RMtoVM(RecipeRepoModel recipeRepoModel)
         {
-            RecipeVM recipeVM = new RecipeVM();
+            RecipeVM recipeVM = new();
 
             var base64Front = Convert.ToBase64String(recipeRepoModel.RecipePhotoFront);
             var base64Back = Convert.ToBase64String(recipeRepoModel.RecipePhotoBack);
@@ -81,7 +76,7 @@ namespace BenHinkleRecipes.Services.VMServices
         }
         public List<RecipeVM> RMListToVMList(List<RecipeRepoModel> recipeRepos)
         {
-            List<RecipeVM> recipeVMs = new List<RecipeVM>();
+            List<RecipeVM> recipeVMs = new();
 
             foreach (RecipeRepoModel recipeRepo in recipeRepos)
             {

@@ -28,7 +28,10 @@
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Recipes</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" asp-controller="Home" asp-action="Index">View All</a>
+                                @if (ViewContext.HttpContext.User.Identity.Name == "bjhinkle22@gmail.com")
+                                {
                                 <a class="dropdown-item" asp-controller="Home" asp-action="CreateRecipe">Add New Recipe</a>
+                                }
                                 @if (ViewContext.HttpContext.User.Identity.Name != null)
                                 {
                                     <a class="dropdown-item" asp-controller="Home" asp-action="GetFavoriteRecipes">Favorite Recipes</a>
@@ -39,7 +42,6 @@
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">About Me</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="https://benjaminjhinkleportfolio.azurewebsites.net">Portfolio</a>
-                                <a class="dropdown-item" href="#">Contact Me</a>
                             </div>
                         </li>
                     </ul>

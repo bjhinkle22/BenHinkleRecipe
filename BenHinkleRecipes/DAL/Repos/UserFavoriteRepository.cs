@@ -7,7 +7,7 @@ namespace BenHinkleRecipes.DAL.Repos
 {
     public class UserFavoriteRepository : IUserFavoriteRepository
     {
-        private DataContext _context;
+        private readonly DataContext _context;
 
         public UserFavoriteRepository(DataContext context)
         {
@@ -19,7 +19,7 @@ namespace BenHinkleRecipes.DAL.Repos
         }
         public void InsertFavoriteRecipe(string userName, int recipeId)
         {
-            UserFavoriteRepoModel favorite = new UserFavoriteRepoModel();
+            UserFavoriteRepoModel favorite = new();
             favorite.userName = userName;
             favorite.recipe_id = recipeId;
             _context.UserFavorites.Add(favorite);
@@ -28,7 +28,7 @@ namespace BenHinkleRecipes.DAL.Repos
 
         public void UpdateFavorite(int id, bool isFavorite, string username)
         {
-            UserFavoriteRepoModel favorite = new UserFavoriteRepoModel();
+            UserFavoriteRepoModel favorite = new();
 
             if(isFavorite == true)
             {
@@ -64,18 +64,18 @@ namespace BenHinkleRecipes.DAL.Repos
             _context.SaveChanges();
         }
 
-        private bool disposed = false;
+        private bool _disposed = false;
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!this._disposed)
             {
                 if (disposing)
                 {
                     _context.Dispose();
                 }
             }
-            this.disposed = true;
+            this._disposed = true;
         }
         public void Dispose()
         {

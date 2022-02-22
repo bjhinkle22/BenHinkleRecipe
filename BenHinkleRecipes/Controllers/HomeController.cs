@@ -15,14 +15,12 @@ namespace BenHinkleRecipes.Controllers
     {
         private readonly IRecipeService _recipeService;
         private readonly IRecipeVMService _recipeVMService;
-        IUserFavoriteService _userFavoriteService;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IUserFavoriteService _userFavoriteService;
 
-        public HomeController(IRecipeService recipeService, IRecipeVMService recipeVMService, UserManager<IdentityUser> userManager, IUserFavoriteService userFavoriteService)
+        public HomeController(IRecipeService recipeService, IRecipeVMService recipeVMService, IUserFavoriteService userFavoriteService)
         {
             _recipeVMService = recipeVMService;
             _recipeService = recipeService;
-            _userManager = userManager;
             _userFavoriteService = userFavoriteService;
         }
         public IActionResult Index()
@@ -36,7 +34,7 @@ namespace BenHinkleRecipes.Controllers
             //Get current username check null, return All Recipes without doing work if null.
             var userName = HttpContext.User.Identity.Name;
 
-            if(userName == null)
+            if (userName == null)
             {
                 return View("Recipes", recipeResponse);
             }
@@ -105,7 +103,7 @@ namespace BenHinkleRecipes.Controllers
         [HttpPost]
         public ActionResult<RecipeVM> CreateRecipe(RecipeVM request)
         {
-          
+
             var recipeRequest = _recipeVMService.VMtoRM(request);
             var recipeResponse = _recipeService.InsertRecipe(recipeRequest);
             var recipeVM = _recipeVMService.RMtoVM(recipeResponse);
@@ -177,7 +175,7 @@ namespace BenHinkleRecipes.Controllers
         public ActionResult<RecipeVM> DeleteRecipe(int id)
         {
             _recipeService.DeleteRecipe(id);
-            if(HttpContext.User.Identity != null)
+            if (HttpContext.User.Identity != null)
             {
                 _userFavoriteService.DeleteFavoriteRecipe(HttpContext.User.Identity.Name, id);
             }
@@ -187,7 +185,7 @@ namespace BenHinkleRecipes.Controllers
         public ActionResult<RecipeVM> GetFavoriteRecipes()
         {
             //Get current UserName
-           var userName = HttpContext.User.Identity.Name;
+            var userName = HttpContext.User.Identity.Name;
 
             //Get Current User List of Favorites
             var userFavorites = _userFavoriteService.GetFavoriteRecipes(userName);
@@ -201,10 +199,10 @@ namespace BenHinkleRecipes.Controllers
 
             foreach (RecipeVM recipe in recipeResponse)
             {
-               for(int i = 0; i < favorites.Count; i++)
+                for (int i = 0; i < favorites.Count; i++)
                 {
                     int test = favorites[i];
-                    if(recipe.RecipeId == favorites[i])
+                    if (recipe.RecipeId == favorites[i])
                     {
                         recipe.IsFavorite = true;
                         favoriteRecipes.Add(recipe);
@@ -213,7 +211,6 @@ namespace BenHinkleRecipes.Controllers
             }
             return View("Recipes", favoriteRecipes);
         }
-
         public void SetFavorite(int recipeId, bool check)
         {
             var userName = HttpContext.User.Identity.Name;

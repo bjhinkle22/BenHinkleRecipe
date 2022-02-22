@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BenHinkleRecipes.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220218161712_CreateIdentitySchema")]
-    partial class CreateIdentitySchema
+    [Migration("20220222043801_UserRecipeTable")]
+    partial class UserRecipeTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,10 +32,7 @@ namespace BenHinkleRecipes.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<DateTime>("DateEntered")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Favorite")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Meat")
@@ -47,14 +44,11 @@ namespace BenHinkleRecipes.Migrations
                     b.Property<string>("RecipeName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RecipePhotoBack")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("RecipePhotoBack")
+                        .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("RecipePhotoFront")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<byte[]>("RecipePhotoFront")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Veggies")
                         .HasColumnType("nvarchar(max)");
@@ -62,6 +56,26 @@ namespace BenHinkleRecipes.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Recipes");
+                });
+
+            modelBuilder.Entity("BenHinkleRecipes.Models.RepoModels.UserFavoriteRepoModel", b =>
+                {
+                    b.Property<int>("UserFavorite_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserFavorite_ID"), 1L, 1);
+
+                    b.Property<int>("recipe_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("userName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserFavorite_ID");
+
+                    b.ToTable("UserFavorites");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

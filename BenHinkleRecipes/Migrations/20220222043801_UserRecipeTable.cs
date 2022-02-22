@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BenHinkleRecipes.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class UserRecipeTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,39 @@ namespace BenHinkleRecipes.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Recipes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RecipeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Meat = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Veggies = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Miscellaneous = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RecipePhotoFront = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    RecipePhotoBack = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Recipes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserFavorites",
+                columns: table => new
+                {
+                    UserFavorite_ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    recipe_id = table.Column<int>(type: "int", nullable: false),
+                    userName = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserFavorites", x => x.UserFavorite_ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -210,6 +243,12 @@ namespace BenHinkleRecipes.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Recipes");
+
+            migrationBuilder.DropTable(
+                name: "UserFavorites");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

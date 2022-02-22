@@ -33,9 +33,6 @@ namespace BenHinkleRecipes.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsFavorite")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Meat")
                         .HasColumnType("nvarchar(max)");
 
@@ -61,11 +58,20 @@ namespace BenHinkleRecipes.Migrations
 
             modelBuilder.Entity("BenHinkleRecipes.Models.RepoModels.UserFavoriteRepoModel", b =>
                 {
+                    b.Property<int>("UserFavorite_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserFavorite_ID"), 1L, 1);
+
                     b.Property<int>("recipe_id")
                         .HasColumnType("int");
 
                     b.Property<string>("userName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserFavorite_ID");
 
                     b.ToTable("UserFavorites");
                 });

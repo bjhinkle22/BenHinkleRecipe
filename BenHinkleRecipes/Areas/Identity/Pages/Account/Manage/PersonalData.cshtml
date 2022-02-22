@@ -1,5 +1,7 @@
 ﻿@page
 @model PersonalDataModel
+
+@inject UserManager<IdentityUser> UserManager
 @{
     ViewData["Title"] = "Personal Data";
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
@@ -17,12 +19,15 @@
             <button class="btn btn-primary" type="submit">Download</button>
         </form>
         <br />
-        <p>
-            <a id="delete" asp-page="DeletePersonalData" class="btn btn-danger">Delete</a>
-        </p>
+        @if (UserManager.GetUserName(User) != "benhinklerecipes@gmail.com")
+        {
+            <p>
+                <a id="delete" asp-page="DeletePersonalData" class="btn btn-danger">Delete</a>
+            </p>
+        }
     </div>
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
 }

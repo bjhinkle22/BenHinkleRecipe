@@ -23,11 +23,7 @@ namespace BenHinkleRecipes.Services
         }
         public void DeleteFavoriteRecipe(string userName, int recipeId)
         {
-            throw new NotImplementedException();
-        }
-        public void Save()
-        {
-            throw new NotImplementedException();
+            _userFavoriteRepository.DeleteFavoriteRecipe(userName, recipeId);
         }
     }
 }

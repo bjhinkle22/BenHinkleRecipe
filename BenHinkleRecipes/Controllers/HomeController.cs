@@ -177,6 +177,10 @@ namespace BenHinkleRecipes.Controllers
         public ActionResult<RecipeVM> DeleteRecipe(int id)
         {
             _recipeService.DeleteRecipe(id);
+            if(HttpContext.User.Identity != null)
+            {
+                _userFavoriteService.DeleteFavoriteRecipe(HttpContext.User.Identity.Name, id);
+            }
             return RedirectToAction("Index");
         }
 

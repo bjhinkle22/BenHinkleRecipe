@@ -24,14 +24,15 @@ namespace BenHinkleRecipes.DAL.Repos
             _context.UserFavorites.Add(favorite);
             Save();
         }
-        public void UpdateRecipe(string userName, int recipeId)
-        {
-            throw new NotImplementedException();
-        }
-
         public void DeleteFavoriteRecipe(string userName, int recipeId)
         {
-            throw new NotImplementedException();
+            var favorites = _context.UserFavorites.Where(u => u.userName == userName && u.recipe_id == recipeId);
+
+            foreach(var item in favorites)
+            {
+                _context.UserFavorites.Remove(item);
+            }
+            Save();
         }
         public void Save()
         {

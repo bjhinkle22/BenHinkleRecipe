@@ -21,10 +21,6 @@ namespace BenHinkleRecipes.Services
         {
             _userFavoriteRepository.InsertFavoriteRecipe(userName, recipeId);
         }
-        public void UpdateRecipe(string userName, int recipeId)
-        {
-            throw new NotImplementedException();
-        }
         public void DeleteFavoriteRecipe(string userName, int recipeId)
         {
             throw new NotImplementedException();

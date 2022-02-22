@@ -172,12 +172,14 @@ namespace BenHinkleRecipes.Controllers
             return View("_RecipeDetails", recipeResult);
 
         }
+
         [HttpPost]
         public ActionResult<RecipeVM> DeleteRecipe(int id)
         {
             _recipeService.DeleteRecipe(id);
             return RedirectToAction("Index");
         }
+
         public ActionResult<RecipeVM> GetFavoriteRecipes()
         {
             //Get current UserName

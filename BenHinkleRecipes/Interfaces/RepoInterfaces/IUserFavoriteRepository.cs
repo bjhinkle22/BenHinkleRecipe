@@ -7,7 +7,6 @@ namespace BenHinkleRecipes.Interfaces.RepoInterfaces
         IEnumerable<UserFavoriteRepoModel> GetFavoriteRecipes(string userName);
         void InsertFavoriteRecipe(string userName, int recipeId);
         void DeleteFavoriteRecipe(string userName, int recipeId);
-        void UpdateRecipe(string userName, int recipeId);
         void Save();
     }
 }

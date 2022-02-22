@@ -6,6 +6,7 @@ namespace BenHinkleRecipes.Interfaces.ServiceInterfaces
     {
         List<UserFavoriteRepoModel> GetFavoriteRecipes(string userName);
         void InsertFavoriteRecipe(string userName, int recipeId);
+        void UpdateFavorite(int id, bool isFavorite, string username);
         void DeleteFavoriteRecipe(string userName, int recipeId);
     }
 }

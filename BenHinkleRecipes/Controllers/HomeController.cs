@@ -216,7 +216,8 @@ namespace BenHinkleRecipes.Controllers
 
         public void SetFavorite(int recipeId, bool check)
         {
-
+            var userName = HttpContext.User.Identity.Name;
+            _userFavoriteService.UpdateFavorite(recipeId, check, userName);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

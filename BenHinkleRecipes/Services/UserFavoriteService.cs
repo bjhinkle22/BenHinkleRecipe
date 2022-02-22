@@ -25,5 +25,9 @@ namespace BenHinkleRecipes.Services
         {
             _userFavoriteRepository.DeleteFavoriteRecipe(userName, recipeId);
         }
+        public void UpdateFavorite(int id, bool isFavorite, string username)
+        {
+            _userFavoriteRepository.UpdateFavorite(id, isFavorite, username);
+        }
     }
 }

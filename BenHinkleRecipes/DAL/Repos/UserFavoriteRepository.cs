@@ -1,6 +1,7 @@
 ﻿using BenHinkleRecipes.DAL.Context;
 using BenHinkleRecipes.Interfaces.RepoInterfaces;
 using BenHinkleRecipes.Models.RepoModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace BenHinkleRecipes.DAL.Repos
 {
@@ -24,6 +25,30 @@ namespace BenHinkleRecipes.DAL.Repos
             _context.UserFavorites.Add(favorite);
             Save();
         }
+
+        public void UpdateFavorite(int id, bool isFavorite, string username)
+        {
+            UserFavoriteRepoModel favorite = new UserFavoriteRepoModel();
+
+            if(isFavorite == true)
+            {
+                favorite.userName = username;
+                favorite.recipe_id = id;
+                _context.UserFavorites.Add(favorite);
+                Save();
+            }
+            if (isFavorite == false)
+            {
+                var favorites = _context.UserFavorites.Where(u => u.userName == username && u.recipe_id == id);
+
+                foreach (var item in favorites)
+                {
+                    _context.UserFavorites.Remove(item);
+                }
+                Save();
+            }
+        }
+
         public void DeleteFavoriteRecipe(string userName, int recipeId)
         {
             var favorites = _context.UserFavorites.Where(u => u.userName == userName && u.recipe_id == recipeId);
@@ -57,5 +82,6 @@ namespace BenHinkleRecipes.DAL.Repos
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+     
     }
 }

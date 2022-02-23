@@ -162,9 +162,28 @@ namespace BenHinkleRecipes.Controllers
 
             if (request.IsFavorite == true && HttpContext.User.Identity.Name != null)
             {
-                //Call Add UserFavorite
-                _userFavoriteService.InsertFavoriteRecipe(HttpContext.User.Identity.Name, request.RecipeId);
+                //Call Add UserFavorite if Favorite doens't exist
+                //Get Current User List of Favorites
+                var userFavorites = _userFavoriteService.GetFavoriteRecipes(HttpContext.User.Identity.Name);
+
+                //Select list of RecipeIDs from list of User's Favorite
+                List<int> favorites = userFavorites.Select(x => x.recipe_id).ToList();
+
+                foreach(var favorite in favorites)
+                {
+                    if (favorite.Equals(request.RecipeId))
+                    {
+                        return View("_RecipeDetails", recipeResult);
+                    }
+                }
+
+                _userFavoriteService.UpdateFavorite(request.RecipeId, request.IsFavorite, HttpContext.User.Identity.Name);
                 recipeResult.IsFavorite = true;
+            }
+            else if(request.IsFavorite == false && HttpContext.User.Identity.Name != null)
+            {
+                _userFavoriteService.UpdateFavorite(request.RecipeId, request.IsFavorite, HttpContext.User.Identity.Name);
+                recipeResult.IsFavorite = false;
             }
 
             return View("_RecipeDetails", recipeResult);

@@ -9,5 +9,6 @@ namespace BenHinkleRecipes.Interfaces.ServiceInterfaces
         List<RecipeVM> RMListToVMList(List<RecipeRepoModel> recipeRepos);
         RecipeVM RMtoVM(RecipeRepoModel recipeRepoModel);
         RecipeRepoModel VMtoRM(RecipeVM recipeVM);
+        byte[] FileToByteArray(IFormFile fileName);
     }
 }

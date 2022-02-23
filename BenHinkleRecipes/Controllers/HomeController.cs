@@ -85,7 +85,6 @@ namespace BenHinkleRecipes.Controllers
             //Adding IsFavorite to Appropriate Recipes
             for (int i = 0; i < favorites.Count; i++)
             {
-                int test = favorites[i];
                 if (recipeResult.RecipeId == favorites[i])
                 {
                     recipeResult.IsFavorite = true;
@@ -103,8 +102,18 @@ namespace BenHinkleRecipes.Controllers
         [HttpPost]
         public ActionResult<RecipeVM> CreateRecipe(RecipeVM request)
         {
-
             var recipeRequest = _recipeVMService.VMtoRM(request);
+            if(recipeRequest.RecipePhotoFront == null)
+            {
+                ViewBag.CreatedWithNullPicture = true;
+                return View("_RecipeCreate", request);
+            }
+            if (recipeRequest.RecipePhotoBack == null)
+            {
+                ViewBag.CreatedWithNullPicture = true;
+                return View("_RecipeCreate", request);
+            }
+
             var recipeResponse = _recipeService.InsertRecipe(recipeRequest);
             var recipeVM = _recipeVMService.RMtoVM(recipeResponse);
 
@@ -155,6 +164,7 @@ namespace BenHinkleRecipes.Controllers
         [HttpPost]
         public ActionResult<RecipeVM> UpdateRecipe(RecipeVM request)
         {
+
             var recipeRequest = _recipeVMService.VMtoRM(request);
             _recipeService.UpdateRecipe(recipeRequest);
             var updatedRecipe = _recipeService.GetRecipe(request.RecipeId);

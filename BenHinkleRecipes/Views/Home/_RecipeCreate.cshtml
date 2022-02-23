@@ -5,6 +5,15 @@
     ViewData["Title"] = "Create Recipe";
 }
 <br />
+
+@if (ViewBag.CreatedWithNullPicture == true)
+{
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Error! Can't create without Photos</strong> <a href="#" class="alert-link">Please upload a front and back photo to represent the recipe</a> and try submitting again.
+    </div>
+}
+<br />
 <form asp-controller="Home" asp-action="CreateRecipe" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-m-2">

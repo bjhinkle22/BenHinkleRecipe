@@ -8,8 +8,10 @@ namespace BenHinkleRecipes.Services.VMServices
     {
         public RecipeRepoModel VMtoRM(RecipeVM recipeVM)
         {
+            //Create new repo model to hold Repo values
             RecipeRepoModel recipeRepoModel = new();
 
+            //Check null, if null retain original image
             if (recipeVM.RecipePhotoFrontFile == null)
             {
                 recipeRepoModel.RecipePhotoFront = recipeVM.OriginalRecipeFront;
@@ -18,20 +20,17 @@ namespace BenHinkleRecipes.Services.VMServices
             {
                 recipeRepoModel.RecipePhotoBack = recipeVM.OriginalRecipeBack;
             }
+            //If file is present in the VM, convert it to byte array, and assign it to the Repo Model
             if (recipeVM.RecipePhotoFrontFile != null)
             {
-                MemoryStream mStream = new();
-                recipeVM.RecipePhotoFrontFile.CopyTo(mStream);
-                var frontBytes = mStream.ToArray();
-                recipeRepoModel.RecipePhotoFront = frontBytes;
+                recipeRepoModel.RecipePhotoFront = FileToByteArray(recipeVM.RecipePhotoFrontFile);
             }
             if (recipeVM.RecipePhotoBackFile != null)
             {
-                MemoryStream mStream1 = new();
-                recipeVM.RecipePhotoBackFile.CopyTo(mStream1);
-                var backBytes = mStream1.ToArray();
-                recipeRepoModel.RecipePhotoBack = backBytes;
+                recipeRepoModel.RecipePhotoBack = FileToByteArray(recipeVM.RecipePhotoBackFile);
             }
+
+            //assign vm values to RM
             recipeRepoModel.Id = recipeVM.RecipeId;
             recipeRepoModel.RecipeName = recipeVM.RecipeName;
             recipeRepoModel.Meat = recipeVM.Meat;
@@ -53,21 +52,42 @@ namespace BenHinkleRecipes.Services.VMServices
         }
         public RecipeVM RMtoVM(RecipeRepoModel recipeRepoModel)
         {
+            //Create new VM to take values from the Repo Model
             RecipeVM recipeVM = new();
 
-            var base64Front = Convert.ToBase64String(recipeRepoModel.RecipePhotoFront);
-            var base64Back = Convert.ToBase64String(recipeRepoModel.RecipePhotoBack);
+            //Check if there is a image stored in the Repo
+            if (recipeRepoModel.RecipePhotoFront != null)
+            {
+                //Convert Byte Array image into Base 64 string
+                var base64Front = Convert.ToBase64String(recipeRepoModel.RecipePhotoFront);
 
-            recipeVM.RecipeFrontDisplay = string.Format("data:image/jpg;base64,{0}", base64Front);
-            recipeVM.RecipeBackDisplay = string.Format("data:image/jpg;base64,{0}", base64Back);
+                //Assign base 64 string to the Display String in the VM, Format it
+                recipeVM.RecipeFrontDisplay = string.Format("data:image/jpg;base64,{0}", base64Front);
+
+                //Retain original byte array, in case user posts form without image (this way user doesn't have to upload the photo on every edit)
+                recipeVM.OriginalRecipeFront = recipeRepoModel.RecipePhotoFront;
+            }
+            //Check if there is a image stored in the Repo
+            if (recipeRepoModel.RecipePhotoBack != null)
+            {
+                //Convert Byte Array image into Base 64 string
+                var base64Back = Convert.ToBase64String(recipeRepoModel.RecipePhotoBack);
+
+                //Assign base 64 string to the Display String in the VM, Format it
+                recipeVM.RecipeBackDisplay = string.Format("data:image/jpg;base64,{0}", base64Back);
+
+                //Retain original byte array, in case user posts form without image (this way user doesn't have to upload the photo on every edit)
+                recipeVM.OriginalRecipeBack = recipeRepoModel.RecipePhotoBack;
+            }
+
+
+            //Assign values from the Repo Model to the VM for displaying
             recipeVM.RecipeId = recipeRepoModel.Id;
             recipeVM.RecipeName = recipeRepoModel.RecipeName;
             recipeVM.Meat = recipeRepoModel.Meat;
             recipeVM.Veggies = recipeRepoModel.Veggies;
             recipeVM.Miscellaneous = recipeRepoModel.Miscellaneous;
             recipeVM.Description = recipeRepoModel.Description;
-            recipeVM.OriginalRecipeFront = recipeRepoModel.RecipePhotoFront;
-            recipeVM.OriginalRecipeBack = recipeRepoModel.RecipePhotoBack;
 
             return recipeVM;
         }
@@ -80,6 +100,14 @@ namespace BenHinkleRecipes.Services.VMServices
                 recipeVMs.Add(RMtoVM(recipeRepo));
             }
             return recipeVMs;
+        }
+
+        public byte[] FileToByteArray(IFormFile fileName)
+        {
+            MemoryStream mStream = new();
+            fileName.CopyTo(mStream);
+            var bytes = mStream.ToArray();
+            return bytes;
         }
     }
 }

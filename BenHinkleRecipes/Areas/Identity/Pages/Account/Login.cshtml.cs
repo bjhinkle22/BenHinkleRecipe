@@ -109,7 +109,7 @@ namespace BenHinkleRecipes.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                if(Input.Email == "demo@gmail.com" && Input.Password == "demo")
+                if(Input.Email == "demo@gmail.com" && Input.Password == @"g\_R4v%A3:Hk(!x%GD]B/^A")
                 {
                     var demoResult = await _signInManager.PasswordSignInAsync("benhinklerecipes@gmail.com","DemoLogin1!", Input.RememberMe, lockoutOnFailure: false);
                     if (demoResult.Succeeded)

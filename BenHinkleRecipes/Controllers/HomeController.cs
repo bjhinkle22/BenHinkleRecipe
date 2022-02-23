@@ -209,7 +209,11 @@ namespace BenHinkleRecipes.Controllers
                     }
                 }
             }
-            return View("Recipes", favoriteRecipes);
+            if(favoriteRecipes.Count > 0)
+            {
+                return View("Recipes", favoriteRecipes);
+            }
+            return View("_EmptyFavorites");
         }
         public void SetFavorite(int recipeId, bool check)
         {

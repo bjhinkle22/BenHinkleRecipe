@@ -12,8 +12,11 @@
         <div id="recipeCardsBody" class="card-body text-primary">
             <h5 id="recipeCardsTitle" class="card-title">@Model.RecipeName</h5>
             <p id="recipeCardsDescription" class="card-text">@Model.Description</p>
+            <label asp-for="Meat"></label>
             <p id="recipeCardsMeat" class="card-text">@Model.Meat</p>
+            <label asp-for="Veggies"></label>
             <p id="recipeCardsVeggies" class="card-text">@Model.Veggies</p>
+            <label asp-for="Miscellaneous" class=""></label>
             <p id="recipeCardsMisc" class="card-text">@Model.Miscellaneous</p>
             <br />
             @if (ViewContext.HttpContext.User.Identity.Name != null)

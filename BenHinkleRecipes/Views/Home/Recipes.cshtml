@@ -12,25 +12,26 @@
     <div>@Html.ActionLink("Create New Recipe", "CreateRecipe", "Home","",new { @class="btn btn-success"})</div>
     <br />
 }
+<br />
 
-<div class="card-columns">
+<div class="card-group">
     @foreach (var element in Model)
-
     {
-        <form asp-action="DeleteRecipe" asp-controller="Home" asp-route-id="@element.RecipeId" method="post">
-            <div data-role="recipe" class="card border-primary mb-3" style="display: inline-block">
-                <img class="card-img-top" src="@element.RecipeFrontDisplay" asp-append-version="true">
-                <div id="recipeCardsBody" class="card-body text-primary">
-                    <h5 id="recipeCardsTitle" class="card-title">@Html.DisplayFor(m => element.RecipeName)</h5>
-                    <p id="recipeCardsDescription" class="card-text">@Html.DisplayFor(m => element.Description)</p>
+        <div class="col-lg-4 mb-3 d-flex align-items-stretch">
+            <div data-role="recipe" class="card border-primary" style="display: inline-block; ">
+                <form asp-action="DeleteRecipe" asp-controller="Home" asp-route-id="@element.RecipeId" method="post">
+                    <img class="card-img-top" src="@element.RecipeFrontDisplay" asp-append-version="true">
+                    <div id="recipeCardsBody" class="card-body text-primary">
+                        <h5 id="recipeCardsTitle" class="card-title">@Html.DisplayFor(m => element.RecipeName)</h5>
+                        <p id="recipeCardsDescription" class="card-text">@Html.DisplayFor(m => element.Description)</p>
+                    </div>
                     @if (ViewContext.HttpContext.User.Identity.Name != null)
                     {
                         <input asp-for="@element.IsFavorite" type="checkbox" class=star onclick="UpdateRecipe(this)" data-recipeid="@element.RecipeId">
                         <br />
                         <br />
-
                     }
-                    @Html.ActionLink("Details","GetRecipeById", "Home", new { id = element.RecipeId }, new { @class="btn btn-info"})
+                    @Html.ActionLink("Details","GetRecipeById", "Home", new { id = element.RecipeId }, new { @class="btn btn-info", @style="margin:1rem;"})
                     @if (ViewContext.HttpContext.User.Identity.Name == "bjhinkle22@gmail.com")
                     {
                         @Html.ActionLink("Edit", "UpdateRecipe", "Home",new { id = element.RecipeId }, new { @class="btn btn-primary"})
@@ -44,9 +45,9 @@
                             <span>Are you sure you want to delete?</span>
                         </span>
                     }
-                </div>
+                </form>
             </div>
-        </form>
+        </div>
     }
 </div>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>

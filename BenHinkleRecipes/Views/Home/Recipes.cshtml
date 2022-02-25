@@ -31,12 +31,12 @@
                         <br />
                         <br />
                     }
-                    @Html.ActionLink("Details","GetRecipeById", "Home", new { id = element.RecipeId }, new { @class="btn btn-info", @style="margin:1rem;"})
+                    @Html.ActionLink("Details","GetRecipeById", "Home", new { id = element.RecipeId }, new { @class="btn btn-info", @style="margin:0 0 1rem 1rem;"})
                     @if (ViewContext.HttpContext.User.Identity.Name == "bjhinkle22@gmail.com")
                     {
-                        @Html.ActionLink("Edit", "UpdateRecipe", "Home",new { id = element.RecipeId }, new { @class="btn btn-primary"})
+                        @Html.ActionLink("Edit", "UpdateRecipe", "Home",new { id = element.RecipeId }, new { @class="btn btn-primary", @style="margin:0 0 1rem 0;"})
                         <span id="deleteSpan_@element.RecipeId">
-                            <a href="#deleteSpan_@element.RecipeId" onclick="confirmDelete('@element.RecipeId', true)" class="btn btn-danger">Delete</a>
+                            <a href="#deleteSpan_@element.RecipeId" onclick="confirmDelete('@element.RecipeId', true)" class="btn btn-danger" style="margin:0 0 1rem 0;">Delete</a>
                         </span>
                         <span id="confirmDeleteSpan_@element.RecipeId" style="display:none">
                             <button type="submit" class="btn btn-danger" )">Yes</button>

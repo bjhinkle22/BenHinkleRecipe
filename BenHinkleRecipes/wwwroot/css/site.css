@@ -81,6 +81,7 @@ body {
     .star:before {
         content: "\2606";
         position: absolute;
+        margin: 0 0 0 1rem;
         visibility: visible;
     }
 

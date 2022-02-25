@@ -12,42 +12,53 @@
     <div>@Html.ActionLink("Create New Recipe", "CreateRecipe", "Home","",new { @class="btn btn-success"})</div>
     <br />
 }
-
-<div class="card-columns">
+@*<div class="card-columns">
     @foreach (var element in Model)
-
     {
-        <form asp-action="DeleteRecipe" asp-controller="Home" asp-route-id="@element.RecipeId" method="post">
-            <div data-role="recipe" class="card border-primary mb-3" style="display: inline-block">
-                <img class="card-img-top" src="@element.RecipeFrontDisplay" asp-append-version="true">
-                <div id="recipeCardsBody" class="card-body text-primary">
-                    <h5 id="recipeCardsTitle" class="card-title">@Html.DisplayFor(m => element.RecipeName)</h5>
-                    <p id="recipeCardsDescription" class="card-text">@Html.DisplayFor(m => element.Description)</p>
-                    @if (ViewContext.HttpContext.User.Identity.Name != null)
-                    {
-                        <input asp-for="@element.IsFavorite" type="checkbox" class=star onclick="UpdateRecipe(this)" data-recipeid="@element.RecipeId">
-                        <br />
-                        <br />
-                    }
-                    @Html.ActionLink("Details","GetRecipeById", "Home", new { id = element.RecipeId }, new { @class="btn btn-info"})
-                    @if (ViewContext.HttpContext.User.Identity.Name == "bjhinkle22@gmail.com")
-                    {
-                        @Html.ActionLink("Edit", "UpdateRecipe", "Home",new { id = element.RecipeId }, new { @class="btn btn-primary"})
-                        <span id="deleteSpan_@element.RecipeId">
-                            <a href="#deleteSpan_@element.RecipeId" onclick="confirmDelete('@element.RecipeId', true)" class="btn btn-danger">Delete</a>
-                        </span>
-                        <span id="confirmDeleteSpan_@element.RecipeId" style="display:none">
-                            <button type="submit" class="btn btn-danger" )">Yes</button>
-                            <a href="#" onclick="confirmDelete('@element.RecipeId', false)" class="btn btn-primary">No</a>
-                            <br />
-                            <span>Are you sure you want to delete?</span>
-                        </span>
-                    }
-                </div>
-            </div>
-        </form>
+    </form>
     }
+    </div>
+*@
+<div class="container">
+    <div class="row">
+        @foreach (var element in Model)
+        {
+
+            <div class="col-sm-4" data-role="recipe">
+                <form asp-action="DeleteRecipe" asp-controller="Home" asp-route-id="@element.RecipeId" method="post" id="recipeCard">
+                    <div class="card" style="height:40rem; width:25rem; margin-top:1rem;">
+                        <img class="card-img-top" src="@element.RecipeFrontDisplay" asp-append-version="true">
+                        <div id="recipeCardsBody" class="card-body text-primary">
+                            <h5 class="card-title fw-bold">@Html.DisplayFor(m => element.RecipeName)</h5>
+                            <p class="card-text">@Html.DisplayFor(m => element.Description)</p>
+                        </div>
+                        @if (ViewContext.HttpContext.User.Identity.Name != null)
+                        {
+                            <input asp-for="@element.IsFavorite" type="checkbox" class=star onclick="UpdateRecipe(this)" data-recipeid="@element.RecipeId">
+                            <br />
+                        }
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            @Html.ActionLink("Details","GetRecipeById", "Home", new { id = element.RecipeId }, new { @class="btn btn-info"})
+                            @if (ViewContext.HttpContext.User.Identity.Name == "bjhinkle22@gmail.com")
+                            {
+                                @Html.ActionLink("Edit", "UpdateRecipe", "Home",new { id = element.RecipeId }, new { @class="btn btn-primary"})
+                                 <span id="confirmDeleteSpan_@element.RecipeId" style="display:none">
+                                    <span>Are you sure you want to delete?</span>
+                                    <button type="submit" class="btn btn-danger" )">Yes</button>
+                                    <a href="#" onclick="confirmDelete('@element.RecipeId', false)" class="btn btn-primary">No</a>
+                                </span>
+                                <span id="deleteSpan_@element.RecipeId" class="btn btn-danger">
+                                    <a href="#deleteSpan_@element.RecipeId" onclick="confirmDelete('@element.RecipeId', true)" class="btn btn-danger">Delete</a>
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
 </div>
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/js/site.js"></script>
 

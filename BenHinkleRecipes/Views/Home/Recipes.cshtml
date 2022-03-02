@@ -4,6 +4,8 @@
 @{
     ViewData["Title"] = "Recipes";
 }
+<br />
+<input id="searchbox" class="form-control form-control-lg" type="text" placeholder="Begin typing to filter recipes">
 
 
 @if (ViewContext.HttpContext.User.Identity.Name == "bjhinkle22@gmail.com")
@@ -12,7 +14,7 @@
     <div>@Html.ActionLink("Create New Recipe", "CreateRecipe", "Home","",new { @class="btn btn-success"})</div>
     <br />
 }
-<div class="container">
+<div class="container" id="carcontainer">
     <div class="row">
         @foreach (var element in Model)
         {
@@ -34,12 +36,12 @@
                             @Html.ActionLink("View Details","GetRecipeById", "Home", new { id = element.RecipeId }, new { @class="btn btn-info"})
                             @if (ViewContext.HttpContext.User.Identity.Name != null)
                             {
-                            @Html.ActionLink("Add to My Recipes","InsertUserRecipe", "Home", new { id = element.RecipeId }, new { @class="btn btn-success"})
+                                @Html.ActionLink("Add to My Recipes","InsertUserRecipe", "Home", new { id = element.RecipeId }, new { @class="btn btn-success"})
                             }
                             @if (ViewContext.HttpContext.User.Identity.Name == "bjhinkle22@gmail.com")
                             {
                                 @Html.ActionLink("Edit", "UpdateRecipe", "Home",new { id = element.RecipeId }, new { @class="btn btn-primary"})
-                                 <span id="confirmDeleteSpan_@element.RecipeId" style="display:none">
+                                <span id="confirmDeleteSpan_@element.RecipeId" style="display:none">
                                     <span>Are you sure you want to delete?</span>
                                     <button type="submit" class="btn btn-danger" )">Yes</button>
                                     <a href="#" onclick="confirmDelete('@element.RecipeId', false)" class="btn btn-primary">No</a>

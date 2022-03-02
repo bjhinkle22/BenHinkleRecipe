@@ -386,7 +386,7 @@ namespace BenHinkleRecipes.Controllers
                 {
                     if (favorite.Equals(request.RecipeId))
                     {
-                        return View("_RecipeDetails", recipeResult);
+                        return View("_UserRecipeDetails", recipeResult);
                     }
                 }
                 _userFavoriteService.UpdateFavorite(request.RecipeId, request.IsFavorite, HttpContext.User.Identity.Name);

@@ -50,12 +50,6 @@ namespace BenHinkleRecipes.Controllers
             //Select list of RecipeIDs from list of User's Favorite
             List<int> favorites = userFavorites.Select(x => x.recipe_id).ToList();
 
-            //Get User Recipes
-            var userRecipes = _userRecipeService.GetUserRecipes(userName);
-
-            //Select list of UserRecipeIDs from list of User's Recipes
-            List<int> userRecipeIds = userRecipes.Select(x => x.UserRecipe_ID).ToList();
-
             //do work to assign favorite to user's favorite recipe
             foreach (RecipeVM recipe in recipeResponse)
             {

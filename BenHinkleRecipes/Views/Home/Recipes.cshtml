@@ -5,7 +5,7 @@
     ViewData["Title"] = "Recipes";
 }
 <br />
-<input id="searchbox" class="form-control form-control-lg" type="text" placeholder="Begin typing to filter recipes">
+<input id="searchbox" class="form-control form-control-lg" autocomplete="off" type="text" placeholder="Begin typing to filter recipes">
 
 
 @if (ViewContext.HttpContext.User.Identity.Name == "bjhinkle22@gmail.com")
@@ -14,7 +14,7 @@
     <div>@Html.ActionLink("Create New Recipe", "CreateRecipe", "Home","",new { @class="btn btn-success"})</div>
     <br />
 }
-<div class="container" id="carcontainer">
+<div class="container">
     <div class="row">
         @foreach (var element in Model)
         {

@@ -404,7 +404,7 @@ namespace BenHinkleRecipes.Controllers
 
             var userRecipesVMs = _userRecipeVMService.RMListToVMList(userRecipes);
 
-            foreach(var item in userRecipesVMs)
+            foreach (var item in userRecipesVMs)
             {
                 if (recipe.Id == item.RecipeId)
                 {
@@ -420,36 +420,39 @@ namespace BenHinkleRecipes.Controllers
             userRecipe.userName = HttpContext.User.Identity.Name;
 
             //Add RecipeRM to User Recipe Table
-            var recipeResponse = _userRecipeService.InsertUserRecipe(userRecipe);
+            _userRecipeService.InsertUserRecipe(userRecipe);
 
-            //Return RecipeRM that was just created
-            var userRecipeVM = _userRecipeVMService.RMtoVM(recipeResponse);
+            //Get All User Recipes
+            var allRecipes = _userRecipeService.GetUserRecipes(HttpContext.User.Identity.Name);
 
+            //Convert List of Repo Models to  List of ViewModels
+            var recipeResponse = _userRecipeVMService.RMListToVMList(allRecipes);
 
             //Get Current User List of Favorites
-            var userFavorites = _userFavoriteService.GetFavoriteRecipes(userRecipe.userName);
+            var userFavorites = _userFavoriteService.GetFavoriteRecipes(HttpContext.User.Identity.Name);
 
             //Select list of RecipeIDs from list of User's Favorite
             List<int> favorites = userFavorites.Select(x => x.recipe_id).ToList();
 
-            //Adding IsFavorite to Appropriate Recipes
-            for (int i = 0; i < favorites.Count; i++)
+            //do work to assign favorite to user's favorite recipe
+            foreach (UserRecipeVM userRecipe1 in recipeResponse)
             {
-                if (userRecipeVM.RecipeId == favorites[i])
+                for (int i = 0; i < favorites.Count; i++)
                 {
-                    userRecipeVM.IsFavorite = true;
+                    if (userRecipe1.RecipeId == favorites[i])
+                    {
+                        userRecipe1.IsFavorite = true;
+                    }
                 }
             }
-
-            return View("_UserRecipeDetails", userRecipeVM);
+            ViewBag.UserRecipeCreatedSuccess = true;
+            return View("_UserRecipes", recipeResponse);
         }
 
         [HttpPost]
         public ActionResult<UserRecipeVM> DeleteUserRecipe(int id)
         {
             _userRecipeService.DeleteUserRecipe(id);
-            ViewBag.UserRecipeDeleteSuccess = true;
-
             return RedirectToAction("GetUserRecipes");
         }
 

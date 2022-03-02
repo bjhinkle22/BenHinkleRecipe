@@ -5,20 +5,12 @@
     ViewData["Title"] = "Recipes";
 }
 
-
 @if (ViewContext.HttpContext.User.Identity.Name == "bjhinkle22@gmail.com")
 {
     <br />
     <div>@Html.ActionLink("Create New Recipe", "CreateRecipe", "Home","",new { @class="btn btn-success"})</div>
     <br />
 }
-@*<div class="card-columns">
-    @foreach (var element in Model)
-    {
-    </form>
-    }
-    </div>
-*@
 <div class="container">
     <div class="row">
         @foreach (var element in Model)
@@ -38,7 +30,11 @@
                             <br />
                         }
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            @Html.ActionLink("Details","GetRecipeById", "Home", new { id = element.RecipeId }, new { @class="btn btn-info"})
+                            @Html.ActionLink("View Details","GetRecipeById", "Home", new { id = element.RecipeId }, new { @class="btn btn-info"})
+                            @if (ViewContext.HttpContext.User.Identity.Name != null)
+                            {
+                            @Html.ActionLink("Add to My Recipes","InsertUserRecipe", "Home", new { id = element.RecipeId }, new { @class="btn btn-success"})
+                            }
                             @if (ViewContext.HttpContext.User.Identity.Name == "bjhinkle22@gmail.com")
                             {
                                 @Html.ActionLink("Edit", "UpdateRecipe", "Home",new { id = element.RecipeId }, new { @class="btn btn-primary"})

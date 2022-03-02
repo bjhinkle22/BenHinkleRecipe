@@ -14,10 +14,13 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
+builder.Services.AddScoped<IUserRecipeRepository, UserRecipeRepoository>();
+builder.Services.AddScoped<IUserRecipeService, UserRecipeService>();
 builder.Services.AddScoped<IUserFavoriteRepository, UserFavoriteRepository>();
 builder.Services.AddScoped<IUserFavoriteService, UserFavoriteService>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<IRecipeVMService, RecipeVMService>();
+builder.Services.AddScoped<IUserRecipeVMService, UserRecipeVMService>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 builder.Services.ConfigureApplicationCookie(o => {

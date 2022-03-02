@@ -1,0 +1,71 @@
+﻿@using BenHinkleRecipes.Models.ViewModels
+@model List<UserRecipeVM>
+
+@{
+    ViewData["Title"] = "User Recipes";
+}
+
+@if (ViewBag.UserRecipeAlreadyExists == true)
+{
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>This recipe is already in your recipe list. View the recipe in your Recipe List Below.</strong>
+    </div>
+}
+
+@if (ViewBag.UserRecipeDeleteSuccess == true)
+{
+    <div class="alert alert-dismissible alert-success">
+  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  <strong>Delete Success</strong> You successfully deleted the recipe from your recipe book. It will still show up under All Recipes
+</div>
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var element in Model)
+        {
+            <div class="col-sm-4" data-role="recipe">
+                <form asp-action="DeleteUserRecipe" asp-controller="Home" asp-route-id="@element.UserRecipe_ID" method="post" id="recipeCard">
+                    <div class="card" style="height:40rem; width:25rem; margin-top:1rem;">
+                        <img class="card-img-top" src="@element.RecipeFrontDisplay" asp-append-version="true">
+                        <div id="recipeCardsBody" class="card-body text-primary">
+                            <h5 class="card-title fw-bold">@Html.DisplayFor(m => element.RecipeName)</h5>
+                            <p class="card-text">@Html.DisplayFor(m => element.Description)</p>
+                        </div>
+                        <input asp-for="@element.IsFavorite" type="checkbox" class=star onclick="UpdateRecipe(this)" data-recipeid="@element.RecipeId">
+                        <br />
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            @Html.ActionLink("Details","GetUserRecipeById", "Home", new { id = element.UserRecipe_ID }, new { @class="btn btn-info"})
+                            @Html.ActionLink("Edit", "UpdateUserRecipe", "Home",new { id = element.UserRecipe_ID }, new { @class="btn btn-primary"})
+                            <span id="deleteSpan_@element.RecipeId" class="btn btn-danger">
+                                <a href="#deleteSpan_@element.RecipeId" onclick="confirmDelete('@element.RecipeId', true)" class="btn btn-danger">Delete</a>
+                            </span>
+                        </div>
+                    </div>
+                    <div id="confirmDeleteSpan_@element.RecipeId" style="display:none" class="alert alert-dismissible alert-warning">
+                        <span>Are you sure you want to delete the recipe from your recipe book?</span>
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                        <button href="#" type="reset" onclick="confirmDelete('@element.RecipeId', false)" class="btn btn-primary">No</button>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/site.js"></script>
+
+
+<script>
+        function UpdateRecipe(elem) {
+        var isDone = $(elem).is(':checked');
+        var rid = $(elem).data('recipeid');
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("SetFavorite", "Home")',
+            data: { check: isDone,recipeid:rid }
+        });
+    }
+</script>

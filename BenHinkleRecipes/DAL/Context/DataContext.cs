@@ -10,5 +10,6 @@ namespace BenHinkleRecipes.DAL.Context
         
         public DbSet<RecipeRepoModel> Recipes { get; set; }
         public DbSet<UserFavoriteRepoModel> UserFavorites { get; set; }
+        public DbSet<UserRecipeRepoModel> UserRecipes { get; set; }
     }
 }

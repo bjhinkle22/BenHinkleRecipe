@@ -210,6 +210,7 @@ namespace BenHinkleRecipes.Controllers
             }
             return RedirectToAction("Index");
         }
+
         [HttpGet]
         public ActionResult<RecipeVM> GetFavoriteRecipes()
         {
@@ -240,10 +241,11 @@ namespace BenHinkleRecipes.Controllers
             }
             if(favoriteRecipes.Count > 0)
             {
-                return View("Recipes", favoriteRecipes);
+                return View("FavoriteRecipes", favoriteRecipes);
             }
             return View("_EmptyFavorites");
         }
+
         [HttpPost]
         public void SetFavorite(int recipeId, bool check)
         {

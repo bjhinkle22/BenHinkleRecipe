@@ -8,6 +8,7 @@ namespace BenHinkleRecipes.DAL.Repos
     {
 
         private readonly DataContext _context;
+
         public GroceryListRepository(DataContext context)
         {
             _context = context;
@@ -31,7 +32,6 @@ namespace BenHinkleRecipes.DAL.Repos
                 Save();
             }
         }
-
         public void Save()
         {
             _context.SaveChanges();

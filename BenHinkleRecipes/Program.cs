@@ -21,6 +21,9 @@ builder.Services.AddScoped<IUserFavoriteService, UserFavoriteService>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<IRecipeVMService, RecipeVMService>();
 builder.Services.AddScoped<IUserRecipeVMService, UserRecipeVMService>();
+builder.Services.AddScoped<IGroceryListRepository, GroceryListRepository>();
+builder.Services.AddScoped<IGroceryListService, GroceryListService>();
+builder.Services.AddScoped<IGroceryListVMService, GroceryListVMService>();
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.Configure<AuthMessageSenderOptions>(builder.Configuration);
 builder.Services.ConfigureApplicationCookie(o => {

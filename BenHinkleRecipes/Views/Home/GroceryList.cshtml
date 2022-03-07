@@ -1,0 +1,77 @@
+﻿@using BenHinkleRecipes.Models.ViewModels
+@model List<GroceryListVM>
+
+@{
+    ViewData["Title"] = "Grocery List";
+}
+
+<br />
+<h1>Grocery List</h1>
+<br />
+
+
+@if (ViewBag.ItemAlreadyInGroceryList == true)
+{
+    <div class="alert alert-dismissible alert-danger">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <strong>Error! Item Already in Grocery List</strong>  You can only add this recipe to your grocery list one time
+    </div>
+}
+
+
+<div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                Meat
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" style="">
+            <div class="accordion-body">
+                @foreach (var element in Model)
+                {
+                    <div>
+                        @Html.DisplayFor(m => element.Meat)
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Veggies
+            </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" style="">
+            <div class="accordion-body">
+                @foreach (var element in Model)
+                {
+                    <div>
+                        @Html.DisplayFor(m => element.Veggies)
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Miscellaneous
+            </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
+            <div class="accordion-body">
+                @foreach (var element in Model)
+                {
+                    <div>
+                        @Html.DisplayFor(m => element.Miscellaneous)
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+@Html.ActionLink("Clear Grocery List","ClearGroceryList", "Home")

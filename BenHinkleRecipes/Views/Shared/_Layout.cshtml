@@ -27,7 +27,7 @@
                         @if (ViewContext.HttpContext.User.Identity.Name != null)
                         {
                             <li class="nav-item">
-                                <a class="nav-link active" asp-controller="Home" asp-action="GetGroceryList">
+                                <a class="nav-link active" asp-controller="GroceryList" asp-action="GetGroceryList">
                                     Grocery List
                                     <span class="visually-hidden">(current)</span>
                                 </a>
@@ -44,7 +44,7 @@
                                 @if (ViewContext.HttpContext.User.Identity.Name != null)
                                 {
                                     <a class="dropdown-item" asp-controller="Home" asp-action="GetFavoriteRecipes">Favorite Recipes</a>
-                                    <a class="dropdown-item" asp-controller="Home" asp-action="GetUserRecipes">My Recipes</a>
+                                    <a class="dropdown-item" asp-controller="UserRecipe" asp-action="GetUserRecipes">My Recipes</a>
                                 }
                             </div>
                         </li>

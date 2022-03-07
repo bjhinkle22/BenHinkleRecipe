@@ -28,7 +28,7 @@
         @foreach (var element in Model)
         {
             <div class="col-sm-4" data-role="recipe">
-                <form asp-action="DeleteUserRecipe" asp-controller="Home" asp-route-id="@element.UserRecipe_ID" method="post" id="recipeCard">
+                <form asp-action="DeleteUserRecipe" asp-controller="UserRecipe" asp-route-id="@element.UserRecipe_ID" method="post" id="recipeCard">
                     <div class="card" style="height:40rem; width:25rem; margin-top:1rem;">
                         <img class="card-img-top" src="@element.RecipeFrontDisplay" asp-append-version="true">
                         <div id="recipeCardsBody" class="card-body text-primary">
@@ -38,8 +38,9 @@
                         <input asp-for="@element.IsFavorite" type="checkbox" class=star onclick="UpdateRecipe(this)" data-recipeid="@element.RecipeId">
                         <br />
                         <div class="btn-group" role="group" aria-label="Basic example">
-                            @Html.ActionLink("Details","GetUserRecipeById", "Home", new { id = element.UserRecipe_ID }, new { @class="btn btn-info"})
-                            @Html.ActionLink("Edit", "UpdateUserRecipe", "Home",new { id = element.UserRecipe_ID }, new { @class="btn btn-primary"})
+                            @Html.ActionLink("Add to Grocery List","AddToGroceryList", "GroceryList", new { id = element.RecipeId }, new { @class="btn btn-primary"})
+                            @Html.ActionLink("Details","GetUserRecipeById", "UserRecipe", new { id = element.UserRecipe_ID }, new { @class="btn btn-info"})
+                            @Html.ActionLink("Edit", "UpdateUserRecipe", "UserRecipe",new { id = element.UserRecipe_ID }, new { @class="btn btn-light"})
                             <span id="deleteSpan_@element.RecipeId" class="btn btn-danger">
                                 <a href="#deleteSpan_@element.RecipeId" onclick="confirmDelete('@element.RecipeId', true)" class="btn btn-danger">Delete</a>
                             </span>

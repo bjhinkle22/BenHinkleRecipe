@@ -6,7 +6,7 @@
 }
 
 <br />
-<form asp-action="DeleteRecipe" asp-controller="Home" asp-route-id="@Model.RecipeId" method="post">
+<form asp-action="DeleteUserRecipe" asp-controller="UserRecipe" asp-route-id="@Model.UserRecipe_ID" method="post">
     <div data-role="recipe" class="card mb-3" style="display: inline-block">
         <img class="card-img-top" src="@Model.RecipeBackDisplay" asp-append-version="true">
         <div id="recipeCardsBody" class="card-body text-primary">
@@ -23,21 +23,22 @@
             {
                 <input asp-for="@Model.IsFavorite" type="checkbox" class=star onclick="UpdateRecipe(this)" data-recipeid="@Model.RecipeId">
                 <br />
+                <br />
             }
-            @if (ViewContext.HttpContext.User.Identity.Name == "bjhinkle22@gmail.com")
-            {
-                @Html.ActionLink("Edit", "UpdateRecipe", "Home",new { id = @Model.RecipeId }, new { @class="btn btn-primary"})
-                <span id="deleteSpan_@Model.RecipeId">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                @Html.ActionLink("Add to Grocery List","AddToGroceryList", "GroceryList", new { id = @Model.RecipeId }, new { @class="btn btn-primary"})
+                @Html.ActionLink("Edit", "UpdateUserRecipe", "UserRecipe", new { id = @Model.UserRecipe_ID }, new { @class="btn btn-light"})
+                <span id="deleteSpan_@Model.RecipeId" class="btn btn-danger">
                     <a href="#deleteSpan_@Model.RecipeId" onclick="confirmDelete('@Model.RecipeId', true)" class="btn btn-danger">Delete</a>
                 </span>
-                <span id="confirmDeleteSpan_@Model.RecipeId" style="display:none">
-                    <button type="submit" class="btn btn-danger" )">Yes</button>
-                    <a href="#" onclick="confirmDelete('@Model.RecipeId', false)" class="btn btn-primary">No</a>
-                    <br />
-                    <span>Are you sure you want to delete?</span>
-                </span>
-            }
+            </div>
         </div>
+        <div id="confirmDeleteSpan_@Model.RecipeId" style="display:none" class="alert alert-dismissible alert-warning">
+            <span>Are you sure you want to delete the recipe from your recipe book?</span>
+            <button type="submit" class="btn btn-danger">Yes</button>
+            <button href="#" type="reset" onclick="confirmDelete('@Model.RecipeId', false)" class="btn btn-primary">No</button>
+        </div>
+    </div>
     </div>
 </form>
 

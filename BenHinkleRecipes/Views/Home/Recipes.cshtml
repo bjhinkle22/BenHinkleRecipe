@@ -36,8 +36,8 @@
                             @Html.ActionLink("Details","GetRecipeById", "Home", new { id = element.RecipeId }, new { @class="btn btn-info"})
                             @if (ViewContext.HttpContext.User.Identity.Name != null)
                             {
-                                @Html.ActionLink("Add to My Recipes","InsertUserRecipe", "Home", new { id = element.RecipeId }, new { @class="btn btn-success"})
-                                @Html.ActionLink("Add to Grocery List","AddToGroceryList", "Home", new { id = element.RecipeId }, new { @class="btn btn-primary"})
+                                @Html.ActionLink("Add to My Recipes","InsertUserRecipe", "UserRecipe", new { id = element.RecipeId }, new { @class="btn btn-success"})
+                                @Html.ActionLink("Add to Grocery List","AddToGroceryList", "GroceryList", new { id = element.RecipeId }, new { @class="btn btn-primary"})
                             }
                         </div>
                     </div>

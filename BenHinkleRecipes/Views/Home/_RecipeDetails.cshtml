@@ -24,21 +24,10 @@
                 <input asp-for="@Model.IsFavorite" type="checkbox" class=star onclick="UpdateRecipe(this)" data-recipeid="@Model.RecipeId">
                 <br />
                 <br />
-
-            }
-            @if (ViewContext.HttpContext.User.Identity.Name == "bjhinkle22@gmail.com")
-            {
-                @Html.ActionLink("Edit", "UpdateRecipe", "Home",new { id = @Model.RecipeId }, new { @class="btn btn-primary"})
-                <span id="deleteSpan_@Model.RecipeId">
-                    <a href="#deleteSpan_@Model.RecipeId" onclick="confirmDelete('@Model.RecipeId', true)" class="btn btn-danger">Delete</a>
-                </span>
-                <span id="confirmDeleteSpan_@Model.RecipeId" style="display:none">
-                    <button type="submit" class="btn btn-danger" )">Yes</button>
-                    <a href="#" onclick="confirmDelete('@Model.RecipeId', false)" class="btn btn-primary">No</a>
-                    <br />
-                    <span>Are you sure you want to delete?</span>
-                </span>
-                @Html.ActionLink("Add to Grocery List", "AddToGroceryList", "Home",new { id = @Model.RecipeId }, new { @class="btn btn-success"})
+                <div class="btn-group" role="group" aria-label="Basic example">
+                        @Html.ActionLink("Add to My Recipes","InsertUserRecipe", "UserRecipe", new { id = @Model.RecipeId }, new { @class="btn btn-success"})
+                        @Html.ActionLink("Add to Grocery List","AddToGroceryList", "GroceryList", new { id = @Model.RecipeId }, new { @class="btn btn-primary"})
+                </div>
             }
         </div>
     </div>

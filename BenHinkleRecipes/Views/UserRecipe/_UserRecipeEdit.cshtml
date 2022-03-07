@@ -14,7 +14,7 @@
 }
 
 <br />
-<form asp-controller="Home" asp-action="UpdateUserRecipe" method="post" enctype="multipart/form-data">
+<form asp-controller="UserRecipe" asp-action="UpdateUserRecipe" method="post" enctype="multipart/form-data">
     <div class="row">
         <div class="col-m-2">
             <label asp-for="RecipeName"></label>
@@ -58,7 +58,7 @@
     <button class="btn btn-success">Save</button>
 </form>
 <br />
-<input type="button" class="btn btn-secondary" value="Cancel" onclick="location.href='@Url.Action("Index","Home")';" />
+<input type="button" class="btn btn-secondary" value="Cancel" onclick="location.href='@Url.Action("GetUserRecipes","UserRecipe")';" />
 
 
 

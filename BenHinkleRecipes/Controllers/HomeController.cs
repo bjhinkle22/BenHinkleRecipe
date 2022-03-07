@@ -37,6 +37,7 @@ namespace BenHinkleRecipes.Controllers
 
             if (userName == null)
             {
+                ViewBag.UserNotSignedIn = true;
                 return View("Recipes", recipeResponse);
             }
 

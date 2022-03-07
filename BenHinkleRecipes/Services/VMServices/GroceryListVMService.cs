@@ -41,5 +41,17 @@ namespace BenHinkleRecipes.Services.VMServices
             }
             return groceryListVMs;
         }
+
+        public GroceryListRepoModel UserRecipeToGroceryListItem(UserRecipeRepoModel userRecipeRepoModel)
+        {
+            GroceryListRepoModel groceryListRepoModel = new GroceryListRepoModel();
+
+            groceryListRepoModel.Meat = userRecipeRepoModel.Meat;
+            groceryListRepoModel.Veggies = userRecipeRepoModel.Veggies;
+            groceryListRepoModel.Miscellaneous = userRecipeRepoModel.Miscellaneous;
+            groceryListRepoModel.recipe_id = userRecipeRepoModel.recipe_id;
+
+            return groceryListRepoModel;
+        }
     }
 }

@@ -26,7 +26,7 @@
                 <br />
             }
             <div class="btn-group" role="group" aria-label="Basic example">
-                @Html.ActionLink("Add to Grocery List","AddToGroceryList", "GroceryList", new { id = @Model.RecipeId }, new { @class="btn btn-primary"})
+                @Html.ActionLink("Add to Grocery List","UserAddToGroceryList", "GroceryList", new { id = @Model.UserRecipe_ID }, new { @class="btn btn-primary"})
                 @Html.ActionLink("Edit", "UpdateUserRecipe", "UserRecipe", new { id = @Model.UserRecipe_ID }, new { @class="btn btn-light"})
                 <span id="deleteSpan_@Model.RecipeId" class="btn btn-danger">
                     <a href="#deleteSpan_@Model.RecipeId" onclick="confirmDelete('@Model.RecipeId', true)" class="btn btn-danger">Delete</a>

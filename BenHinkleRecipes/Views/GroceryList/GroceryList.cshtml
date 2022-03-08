@@ -34,7 +34,7 @@
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingTwo">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Veggies
+                Produce
             </button>
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" style="">
@@ -45,7 +45,7 @@
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingThree">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Miscellaneous
+                Dairy
             </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
@@ -53,7 +53,52 @@
             </div>
         </div>
     </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                Herbs
+            </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour">
+            <div class="accordion-body">
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFive">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                Spices
+            </button>
+        </h2>
+        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive">
+            <div class="accordion-body">
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Category</th>
+            <th scope="col">Name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Units</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var element in Model)
+        {
+            <tr class="table-primary">
+                <th scope="row">Meat</th>
+                <td>Ground Beef</td>
+                <td>1</td>
+                <td>lb</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 <br />
 @Html.ActionLink("Clear Grocery List","ClearGroceryList", "GroceryList")

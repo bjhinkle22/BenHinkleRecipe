@@ -19,14 +19,18 @@ namespace BenHinkleRecipes.Services
             return groceryListItems;
         }
 
-        public void InsertGroceryListItem(GroceryListRepoModel groceryListItem)
+        public void InsertGroceryListItem(List<GroceryListRepoModel> groceryListItems)
         {
-            _groceryListRepo.InsertGroceryListItem(groceryListItem);
+            _groceryListRepo.InsertGroceryListItem(groceryListItems);
         }
 
         public void ClearGroceryList(string userName)
         {
             _groceryListRepo.ClearGroceryList(userName);
+        }
+        public void UpdateGroceryList(List<GroceryListRepoModel> groceryListItems)
+        {
+            _groceryListRepo.UpdateGroceryList(groceryListItems);
         }
     }
 }

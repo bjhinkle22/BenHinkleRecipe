@@ -212,7 +212,6 @@ namespace BenHinkleRecipes.Controllers
                     }
                 }
             }
-            ViewBag.UserRecipeCreatedSuccess = true;
             return View("_UserRecipes", recipeResponse);
         }
 

@@ -1,6 +1,7 @@
 ﻿using BenHinkleRecipes.DAL.Context;
 using BenHinkleRecipes.Interfaces.RepoInterfaces;
 using BenHinkleRecipes.Models.RepoModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace BenHinkleRecipes.DAL.Repos
 {
@@ -18,10 +19,21 @@ namespace BenHinkleRecipes.DAL.Repos
         {
             return _context.GroceryLists.Where(u => u.userName == userName);
         }
-        public void InsertGroceryListItem(GroceryListRepoModel groceryListItem)
+        public void InsertGroceryListItem(List<GroceryListRepoModel> groceryListItems)
         {
-            _context.GroceryLists.Add(groceryListItem);
-            Save();
+            foreach(var item in groceryListItems)
+            {
+                _context.GroceryLists.Add(item);
+                Save();
+            }
+        }
+        public void UpdateGroceryList(List<GroceryListRepoModel> groceryListItems)
+        {
+            foreach( var item in groceryListItems)
+            {
+                _context.Entry(item).State = EntityState.Modified;
+                Save();
+            }
         }
         public void ClearGroceryList(string userName)
         {
@@ -56,5 +68,6 @@ namespace BenHinkleRecipes.DAL.Repos
             GC.SuppressFinalize(this);
         }
 
+       
     }
 }

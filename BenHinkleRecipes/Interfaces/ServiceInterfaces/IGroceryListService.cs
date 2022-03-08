@@ -5,7 +5,9 @@ namespace BenHinkleRecipes.Interfaces.ServiceInterfaces
     public interface IGroceryListService
     {
         IEnumerable<GroceryListRepoModel> GetGroceryListItems(string userName);
-        void InsertGroceryListItem(GroceryListRepoModel groceryListItem);
+        void InsertGroceryListItem(List<GroceryListRepoModel> groceryListItems);
+
+        void UpdateGroceryList(List<GroceryListRepoModel> groceryListItems);
         void ClearGroceryList(string userName);
     }
 }

@@ -254,6 +254,14 @@ namespace BenHinkleRecipes.Controllers
             _userFavoriteService.UpdateFavorite(recipeId, check, userName);
         }
 
+        public IActionResult AddRecipeIngredient(int id)
+        {
+            IngredientVM ingredientVM = new IngredientVM();
+            ingredientVM.recipe_id = id;   
+            ingredientVM.userName = HttpContext.User.Identity.Name;
+            return View("IngredientAdd", ingredientVM);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

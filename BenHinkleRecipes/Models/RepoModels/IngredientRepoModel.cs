@@ -1,11 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace BenHinkleRecipes.Models.RepoModels
 {
-    public class GroceryListRepoModel
+    public class IngredientRepoModel
     {
         [Key]
-        public int? UserGroceryListID { get; set; }
+        public int IngredientID { get; set; }
         public int recipe_id { get; set; }
         public string userName { get; set; }
         public string Category { get; set; }

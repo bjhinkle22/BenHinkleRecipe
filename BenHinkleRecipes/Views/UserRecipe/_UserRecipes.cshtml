@@ -9,13 +9,6 @@
 <br />
 <input id="searchbox" class="form-control form-control-lg" autocomplete="off" type="text" placeholder="Begin typing to filter recipes">
 <br />
-@if (ViewBag.UserRecipeCreatedSuccess == true)
-{
-   <div class="alert alert-dismissible alert-success">
-  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-  <strong>Added to your Recipes!</strong> You successfully added a recipe to your Recipe Book.
-</div>
-}
 
 @if (ViewBag.UserRecipeAlreadyExists == true)
 {

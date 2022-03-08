@@ -19,8 +19,9 @@
                 <br />
                 <br />
                 <div class="btn-group" role="group" aria-label="Basic example">
-                        @Html.ActionLink("Add to My Recipes","InsertUserRecipe", "UserRecipe", new { id = @Model.RecipeId }, new { @class="btn btn-success"})
-                        @Html.ActionLink("Add to Grocery List","AddToGroceryList", "GroceryList", new { id = @Model.RecipeId }, new { @class="btn btn-primary"})
+                    @Html.ActionLink("Add to My Recipes","InsertUserRecipe", "UserRecipe", new { id = @Model.RecipeId }, new { @class="btn btn-success"})
+                    @Html.ActionLink("Add to Grocery List","AddToGroceryList", "GroceryList", new { id = @Model.RecipeId }, new { @class="btn btn-primary"})
+                    @Html.ActionLink("Add Ingredients","AddRecipeIngredient", "Home", new { id = @Model.RecipeId }, new { @class="btn btn-warning"})
                 </div>
             }
         </div>

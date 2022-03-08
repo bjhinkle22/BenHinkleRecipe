@@ -6,14 +6,22 @@ namespace BenHinkleRecipes.Services.VMServices
 {
     public class GroceryListVMService : IGroceryListVMService
     {
-        public GroceryListRepoModel RecipeToGroceryListItem(RecipeRepoModel recipeRepoModel)
+        public List<GroceryListRepoModel> RecipeToGroceryListItem(List<IngredientRepoModel> ingredientRepoModels)
         {
-
-            GroceryListRepoModel groceryListRepoModel = new GroceryListRepoModel();
-
-            groceryListRepoModel.recipe_id = recipeRepoModel.Id;
-
-            return groceryListRepoModel;
+            
+            List<GroceryListRepoModel> groceryListRepoModels = new List<GroceryListRepoModel>();
+            foreach (var ing in ingredientRepoModels)
+            {
+                GroceryListRepoModel g = new GroceryListRepoModel();
+                g.Name = ing.Name;
+                g.Category = ing.Category;
+                g.Unit = ing.Unit; 
+                g.Quantity = ing.Quantity;
+                g.recipe_id = ing.recipe_id;
+                g.userName = ing.userName;
+                groceryListRepoModels.Add(g);
+            }
+            return groceryListRepoModels;
         }
         public GroceryListVM RMtoVM(GroceryListRepoModel groceryListRepoModel)
         {
@@ -22,6 +30,10 @@ namespace BenHinkleRecipes.Services.VMServices
 
             //Assign values from the Repo Model to the VM for displaying
             groceryListVM.recipe_id = groceryListRepoModel.recipe_id;
+            groceryListVM.Quantity = groceryListRepoModel.Quantity;
+            groceryListVM.Unit = groceryListRepoModel.Unit;
+            groceryListVM.Name = groceryListRepoModel.Name;
+            groceryListVM.Category = groceryListRepoModel.Category;
 
             return groceryListVM;
         }

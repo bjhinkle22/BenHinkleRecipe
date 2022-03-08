@@ -1,4 +1,5 @@
 ﻿using BenHinkleRecipes.Interfaces.ServiceInterfaces;
+using BenHinkleRecipes.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BenHinkleRecipes.Controllers
@@ -9,13 +10,17 @@ namespace BenHinkleRecipes.Controllers
         private readonly IUserRecipeService _userRecipeService;
         private readonly IGroceryListService _groceryListService;
         private readonly IGroceryListVMService _groceryListVMService;
+        private readonly IIngredientService _ingredientService;
+        private readonly IIngredientVMService _ingredientVMService;
 
-        public GroceryListController(IGroceryListService groceryListService, IRecipeService recipeService, IGroceryListVMService groceryListVMService, IUserRecipeService userRecipeService)
+        public GroceryListController(IGroceryListService groceryListService, IRecipeService recipeService, IGroceryListVMService groceryListVMService, IUserRecipeService userRecipeService, IIngredientService ingredientService, IIngredientVMService ingredientVMService)
         {
             _groceryListService = groceryListService;
             _recipeService = recipeService;
             _groceryListVMService = groceryListVMService;
             _userRecipeService = userRecipeService;
+            _ingredientService = ingredientService;
+            _ingredientVMService = ingredientVMService;
         }
         public IActionResult Index()
         {
@@ -24,87 +29,66 @@ namespace BenHinkleRecipes.Controllers
 
         public IActionResult GetGroceryList()
         {
-            var groceryListItemsRM = _groceryListService.GetGroceryListItems(HttpContext.User.Identity.Name).ToList();
+            var groceryListItemsRMs = _groceryListService.GetGroceryListItems(HttpContext.User.Identity.Name).ToList();
 
-            var groceryListItems = _groceryListVMService.RMListToVMList(groceryListItemsRM);
+            var groceryListVMs = _groceryListVMService.RMListToVMList(groceryListItemsRMs);
 
-            return View("GroceryList", groceryListItems);
+            return View("GroceryList", groceryListVMs);
         }
 
         public IActionResult AddToGroceryList(int id)
         {
-            //Get Recipe by id
-            var recipe = _recipeService.GetRecipe(id);
 
-            //Check if user already has added this Recipe to their list
-            var groceryListItemsRM = _groceryListService.GetGroceryListItems(HttpContext.User.Identity.Name).ToList();
+            var recipeIngredients = _ingredientService.GetRecipeIngredients(id).ToList();
 
-            var groceryListItems = _groceryListVMService.RMListToVMList(groceryListItemsRM);
+            var groceryList = _groceryListService.GetGroceryListItems(HttpContext.User.Identity.Name).ToList();
 
-            foreach (var item in groceryListItems)
+            var groceryIngredients = _groceryListVMService.RecipeToGroceryListItem(recipeIngredients);
+
+            var needsUpdate = false;
+            if(groceryList.Count > 0)
             {
-                if (item.recipe_id == recipe.Id)
+                foreach(var item in groceryList)
                 {
-                    ViewBag.ItemAlreadyInGroceryList = true;
-                    return View("GroceryList", groceryListItems);
+                    foreach(var ingredient in recipeIngredients)
+                    {
+                        if(ingredient.Name == item.Name)
+                        {
+                            item.Quantity = ingredient.Quantity + item.Quantity;
+                            needsUpdate = true;
+                        }
+                    }
+                    if (needsUpdate == true)
+                    {
+                        _groceryListService.UpdateGroceryList(groceryList);
+                    }
                 }
             }
+            if(needsUpdate == false)
+            {
+                _groceryListService.InsertGroceryListItem(groceryIngredients);
+            }
 
-            var groceryListItem = _groceryListVMService.RecipeToGroceryListItem(recipe);
+            var groceryListReturn = _groceryListService.GetGroceryListItems(HttpContext.User.Identity.Name).ToList();
 
-            groceryListItem.userName = HttpContext.User.Identity.Name;
+            var groceryListDisplay = _groceryListVMService.RMListToVMList(groceryListReturn);
 
-            _groceryListService.InsertGroceryListItem(groceryListItem);
-
-            var updatedGroceryListItemsRM = _groceryListService.GetGroceryListItems(HttpContext.User.Identity.Name).ToList();
-
-            var updatedGroceryListItems = _groceryListVMService.RMListToVMList(updatedGroceryListItemsRM);
-
-            return View("GroceryList", updatedGroceryListItems);
+            return View("GroceryList", groceryListDisplay);
 
         }
 
         public IActionResult UserAddToGroceryList(int id)
         {
             //Get Recipe by id
-            var recipe = _userRecipeService.GetRecipe(id);
-
-            //Check if user already has added this Recipe to their list
-            var groceryListItemsRM = _groceryListService.GetGroceryListItems(HttpContext.User.Identity.Name).ToList();
-
-            var groceryListItems = _groceryListVMService.RMListToVMList(groceryListItemsRM);
-
-            foreach (var item in groceryListItems)
-            {
-                if (item.recipe_id == recipe.recipe_id)
-                {
-                    ViewBag.ItemAlreadyInGroceryList = true;
-                    return View("GroceryList", groceryListItems);
-                }
-            }
-
-            var groceryListItem = _groceryListVMService.UserRecipeToGroceryListItem(recipe);
-
-            groceryListItem.userName = HttpContext.User.Identity.Name;
-
-            _groceryListService.InsertGroceryListItem(groceryListItem);
-
-            var updatedGroceryListItemsRM = _groceryListService.GetGroceryListItems(HttpContext.User.Identity.Name).ToList();
-
-            var updatedGroceryListItems = _groceryListVMService.RMListToVMList(updatedGroceryListItemsRM);
-
-            return View("GroceryList", updatedGroceryListItems);
+            return View("GroceryList");
         }
 
         public IActionResult ClearGroceryList()
         {
             _groceryListService.ClearGroceryList(HttpContext.User.Identity.Name);
 
-            var groceryListItemsRM = _groceryListService.GetGroceryListItems(HttpContext.User.Identity.Name).ToList();
-
-            var groceryListItems = _groceryListVMService.RMListToVMList(groceryListItemsRM);
-
-            return View("GroceryList", groceryListItems);
+            List<GroceryListVM> groceryListVMs = new List<GroceryListVM>();
+            return View("GroceryList", groceryListVMs);
         }
     }
 }

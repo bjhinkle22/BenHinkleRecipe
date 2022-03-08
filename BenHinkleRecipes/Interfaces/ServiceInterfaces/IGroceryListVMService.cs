@@ -8,7 +8,7 @@ namespace BenHinkleRecipes.Interfaces.ServiceInterfaces
         GroceryListVM RMtoVM(GroceryListRepoModel groceryListRepoModel);
 
         List<GroceryListVM> RMListToVMList(List<GroceryListRepoModel> groceryListRepos);
-        GroceryListRepoModel RecipeToGroceryListItem(RecipeRepoModel recipeRepoModel);
+        List<GroceryListRepoModel> RecipeToGroceryListItem(List<IngredientRepoModel> ingredientRepoModels);
         GroceryListRepoModel UserRecipeToGroceryListItem(UserRecipeRepoModel userRecipeRepoModel);
     }
 }

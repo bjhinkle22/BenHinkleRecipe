@@ -1,11 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace BenHinkleRecipes.Models.RepoModels
+﻿namespace BenHinkleRecipes.Models.ViewModels
 {
-    public class GroceryListRepoModel
+    public class IngredientVM
     {
-        [Key]
-        public int? UserGroceryListID { get; set; }
+        public int IngredientID { get; set; }
         public int recipe_id { get; set; }
         public string userName { get; set; }
         public string Category { get; set; }

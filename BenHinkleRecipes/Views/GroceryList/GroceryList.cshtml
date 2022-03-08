@@ -28,12 +28,6 @@
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" style="">
             <div class="accordion-body">
-                @foreach (var element in Model)
-                {
-                    <div>
-                        @Html.DisplayFor(m => element.Meat)
-                    </div>
-                }
             </div>
         </div>
     </div>
@@ -45,12 +39,6 @@
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" style="">
             <div class="accordion-body">
-                @foreach (var element in Model)
-                {
-                    <div>
-                        @Html.DisplayFor(m => element.Veggies)
-                    </div>
-                }
             </div>
         </div>
     </div>
@@ -62,12 +50,6 @@
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree">
             <div class="accordion-body">
-                @foreach (var element in Model)
-                {
-                    <div>
-                        @Html.DisplayFor(m => element.Miscellaneous)
-                    </div>
-                }
             </div>
         </div>
     </div>

@@ -11,9 +11,6 @@ namespace BenHinkleRecipes.Services.VMServices
 
             GroceryListRepoModel groceryListRepoModel = new GroceryListRepoModel();
 
-            groceryListRepoModel.Meat = recipeRepoModel.Meat;
-            groceryListRepoModel.Veggies = recipeRepoModel.Veggies;
-            groceryListRepoModel.Miscellaneous = recipeRepoModel.Miscellaneous;
             groceryListRepoModel.recipe_id = recipeRepoModel.Id;
 
             return groceryListRepoModel;
@@ -25,9 +22,6 @@ namespace BenHinkleRecipes.Services.VMServices
 
             //Assign values from the Repo Model to the VM for displaying
             groceryListVM.recipe_id = groceryListRepoModel.recipe_id;
-            groceryListVM.Meat = groceryListRepoModel.Meat;
-            groceryListVM.Veggies = groceryListRepoModel.Veggies;
-            groceryListVM.Miscellaneous = groceryListRepoModel.Miscellaneous;
 
             return groceryListVM;
         }
@@ -46,9 +40,6 @@ namespace BenHinkleRecipes.Services.VMServices
         {
             GroceryListRepoModel groceryListRepoModel = new GroceryListRepoModel();
 
-            groceryListRepoModel.Meat = userRecipeRepoModel.Meat;
-            groceryListRepoModel.Veggies = userRecipeRepoModel.Veggies;
-            groceryListRepoModel.Miscellaneous = userRecipeRepoModel.Miscellaneous;
             groceryListRepoModel.recipe_id = userRecipeRepoModel.recipe_id;
 
             return groceryListRepoModel;

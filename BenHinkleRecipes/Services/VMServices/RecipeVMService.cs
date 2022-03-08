@@ -33,9 +33,6 @@ namespace BenHinkleRecipes.Services.VMServices
             //assign vm values to RM
             recipeRepoModel.Id = recipeVM.RecipeId;
             recipeRepoModel.RecipeName = recipeVM.RecipeName;
-            recipeRepoModel.Meat = recipeVM.Meat;
-            recipeRepoModel.Veggies = recipeVM.Veggies;
-            recipeRepoModel.Miscellaneous = recipeVM.Miscellaneous;
             recipeRepoModel.Description = recipeVM.Description;
 
             return recipeRepoModel;
@@ -84,9 +81,6 @@ namespace BenHinkleRecipes.Services.VMServices
             //Assign values from the Repo Model to the VM for displaying
             recipeVM.RecipeId = recipeRepoModel.Id;
             recipeVM.RecipeName = recipeRepoModel.RecipeName;
-            recipeVM.Meat = recipeRepoModel.Meat;
-            recipeVM.Veggies = recipeRepoModel.Veggies;
-            recipeVM.Miscellaneous = recipeRepoModel.Miscellaneous;
             recipeVM.Description = recipeRepoModel.Description;
 
             return recipeVM;

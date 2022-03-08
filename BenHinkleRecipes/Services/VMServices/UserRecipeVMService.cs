@@ -59,9 +59,6 @@ namespace BenHinkleRecipes.Services.VMServices
             userRecipeVM.UserRecipe_ID = userRecipeRepoModel.UserRecipe_ID;
             userRecipeVM.RecipeId = userRecipeRepoModel.recipe_id;
             userRecipeVM.RecipeName = userRecipeRepoModel.RecipeName;
-            userRecipeVM.Meat = userRecipeRepoModel.Meat;
-            userRecipeVM.Veggies = userRecipeRepoModel.Veggies;
-            userRecipeVM.Miscellaneous = userRecipeRepoModel.Miscellaneous;
             userRecipeVM.Description = userRecipeRepoModel.Description;
 
             return userRecipeVM;
@@ -106,9 +103,6 @@ namespace BenHinkleRecipes.Services.VMServices
             userRecipeRepoModel.UserRecipe_ID = userRecipeVM.UserRecipe_ID;
             userRecipeRepoModel.recipe_id = userRecipeVM.RecipeId;
             userRecipeRepoModel.RecipeName = userRecipeVM.RecipeName;
-            userRecipeRepoModel.Meat = userRecipeVM.Meat;
-            userRecipeRepoModel.Veggies = userRecipeVM.Veggies;
-            userRecipeRepoModel.Miscellaneous = userRecipeVM.Miscellaneous;
             userRecipeRepoModel.Description = userRecipeVM.Description;
 
             return userRecipeRepoModel;
@@ -121,9 +115,6 @@ namespace BenHinkleRecipes.Services.VMServices
             //Assign values from the Repo Model to the VM for displaying
             userRecipeRepoModel.recipe_id = recipe.Id;
             userRecipeRepoModel.RecipeName = recipe.RecipeName;
-            userRecipeRepoModel.Meat = recipe.Meat;
-            userRecipeRepoModel.Veggies = recipe.Veggies;
-            userRecipeRepoModel.Miscellaneous = recipe.Miscellaneous;
             userRecipeRepoModel.Description = recipe.Description;
             userRecipeRepoModel.RecipePhotoFront = recipe.RecipePhotoFront;
             userRecipeRepoModel.RecipePhotoBack = recipe.RecipePhotoBack;

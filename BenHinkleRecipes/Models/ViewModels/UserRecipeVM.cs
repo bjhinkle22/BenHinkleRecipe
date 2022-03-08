@@ -14,9 +14,6 @@ namespace BenHinkleRecipes.Models.ViewModels
         [Required]
         [DisplayName("Recipe Name")]
         public string? RecipeName { get; set; }
-        public string? Meat { get; set; }
-        public string? Veggies { get; set; }
-        public string? Miscellaneous { get; set; }
         [DisplayName("Upload Front of Recipe Photo")]
         public IFormFile? RecipePhotoFrontFile { get; set; }
         [DisplayName("Upload Back of Recipe Photo")]

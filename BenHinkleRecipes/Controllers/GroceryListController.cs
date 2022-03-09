@@ -45,6 +45,8 @@ namespace BenHinkleRecipes.Controllers
 
             var groceryIngredients = _groceryListVMService.RecipeToGroceryListItem(recipeIngredients);
 
+
+
             var needsUpdate = false;
             if(groceryList.Count > 0)
             {
@@ -52,15 +54,20 @@ namespace BenHinkleRecipes.Controllers
                 {
                     foreach(var ingredient in recipeIngredients)
                     {
-                        if(ingredient.Name == item.Name)
+                        for(var i = 0; i < groceryIngredients.Count; i++)
                         {
-                            item.Quantity = ingredient.Quantity + item.Quantity;
-                            needsUpdate = true;
+                            if (ingredient.Name == item.Name && ingredient.Name == groceryIngredients[i].Name)
+                            {
+                                item.Quantity = ingredient.Quantity + item.Quantity;
+                                needsUpdate = true;
+                                groceryIngredients.Remove(groceryIngredients[i]);
+                            }
                         }
                     }
                     if (needsUpdate == true)
                     {
                         _groceryListService.UpdateGroceryList(groceryList);
+                        needsUpdate = false;
                     }
                 }
             }

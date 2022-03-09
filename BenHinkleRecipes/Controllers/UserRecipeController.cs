@@ -80,6 +80,31 @@ namespace BenHinkleRecipes.Controllers
             }
             return View("_UserRecipeDetails", recipeResult);
         }
+        [HttpGet]
+        public ActionResult<UserRecipeVM> GetUserRecipeFrontById(int id)
+        {
+            //Get User Recipe by Id
+            var recipeRequest = _userRecipeService.GetRecipe(id);
+
+            //Convert Repo Model to View Model
+            var recipeResult = _userRecipeVMService.RMtoVM(recipeRequest);
+
+            //Get Current User List of Favorites
+            var userFavorites = _userFavoriteService.GetFavoriteRecipes(HttpContext.User.Identity.Name);
+
+            //Select list of RecipeIDs from list of User's Favorite
+            List<int> favorites = userFavorites.Select(x => x.recipe_id).ToList();
+
+            //Adding IsFavorite to Appropriate Recipes
+            for (int i = 0; i < favorites.Count; i++)
+            {
+                if (recipeResult.RecipeId == favorites[i])
+                {
+                    recipeResult.IsFavorite = true;
+                }
+            }
+            return View("_UserRecipeFrontDetails", recipeResult);
+        }
 
         [HttpGet]
         public ActionResult<UserRecipeVM> UpdateUserRecipe(int id)

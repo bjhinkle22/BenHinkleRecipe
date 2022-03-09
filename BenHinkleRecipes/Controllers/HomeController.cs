@@ -99,6 +99,39 @@ namespace BenHinkleRecipes.Controllers
         }
 
         [HttpGet]
+        public ActionResult<RecipeVM> GetRecipeFrontById(int id)
+        {
+            //Get Recipe by Id
+            var recipeRequest = _recipeService.GetRecipe(id);
+
+            //Convert Repo Model to View Model
+            var recipeResult = _recipeVMService.RMtoVM(recipeRequest);
+
+            //Get current username check null, return All Recipes without doing work if null.
+            var userName = HttpContext.User.Identity.Name;
+
+            if (userName == null)
+            {
+                return View("_RecipeDetails", recipeResult);
+            }
+            //Get Current User List of Favorites
+            var userFavorites = _userFavoriteService.GetFavoriteRecipes(userName);
+
+            //Select list of RecipeIDs from list of User's Favorite
+            List<int> favorites = userFavorites.Select(x => x.recipe_id).ToList();
+
+            //Adding IsFavorite to Appropriate Recipes
+            for (int i = 0; i < favorites.Count; i++)
+            {
+                if (recipeResult.RecipeId == favorites[i])
+                {
+                    recipeResult.IsFavorite = true;
+                }
+            }
+            return View("_RecipeDetailsFront", recipeResult);
+        }
+
+        [HttpGet]
         public ActionResult<RecipeVM> CreateRecipe()
         {
             return View("_RecipeCreate");

@@ -2,13 +2,13 @@
 @model RecipeVM
 
 @{
-    ViewData["Title"] = "Recipe Details";
+    ViewData["Title"] = "Recipe Details Front";
 }
 
 <br />
 <form asp-action="DeleteRecipe" asp-controller="Home" asp-route-id="@Model.RecipeId" method="post">
     <div data-role="recipe" class="card mb-3" style="display: inline-block">
-        <img class="card-img-top" src="@Model.RecipeBackDisplay" asp-append-version="true">
+        <img class="card-img-top" src="@Model.RecipeFrontDisplay" asp-append-version="true">
         <div id="recipeCardsBody" class="card-body text-primary">
             <h5 id="recipeCardsTitle" class="card-title">@Model.RecipeName</h5>
             <p id="recipeCardsDescription" class="card-text">@Model.Description</p>
@@ -21,7 +21,7 @@
                 <div class="btn-group" role="group" aria-label="Basic example">
                     @Html.ActionLink("Add to My Recipes","InsertUserRecipe", "UserRecipe", new { id = @Model.RecipeId }, new { @class="btn btn-success"})
                     @Html.ActionLink("Add to Grocery List","AddToGroceryList", "GroceryList", new { id = @Model.RecipeId }, new { @class="btn btn-primary"})
-                    @Html.ActionLink("View Front of Recipe Card","GetRecipeFrontById", "Home", new { id = @Model.RecipeId }, new { @class="btn btn-info"})
+                    @Html.ActionLink("View Back of Recipe Card","GetRecipeById", "Home", new { id = @Model.RecipeId }, new { @class="btn btn-info"})
                     @if (ViewContext.HttpContext.User.Identity.Name == "bjhinkle22@gmail.com")
                     {
                         @Html.ActionLink("Add Ingredients","AddRecipeIngredient", "Home", new { id = @Model.RecipeId }, new { @class="btn btn-warning"})

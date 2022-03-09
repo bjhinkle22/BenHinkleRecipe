@@ -1,6 +1,7 @@
 ﻿using BenHinkleRecipes.DAL.Context;
 using BenHinkleRecipes.Interfaces.RepoInterfaces;
 using BenHinkleRecipes.Models.RepoModels;
+using BenHinkleRecipes.Models.ViewModels;
 
 namespace BenHinkleRecipes.DAL.Repos
 {
@@ -17,14 +18,33 @@ namespace BenHinkleRecipes.DAL.Repos
             return _context.Ingredients.Where(u => u.recipe_id == id);
         }
 
-        public IEnumerable<IngredientRepoModel> GetRecipeIngredients(string userName)
+        public void InsertIngredient(IngredientRepoModel ingredientRepo)
         {
-            return _context.Ingredients.Where(u => u.userName == userName);
+            _context.Ingredients.Add(ingredientRepo);
+            Save();
+        }
+        public void Save()
+        {
+            _context.SaveChanges();
         }
 
-        public IEnumerable<IngredientRepoModel> GetRecipeIngredients(string userName, int id)
+        private bool _disposed = false;
+
+        protected virtual void Dispose(bool disposing)
         {
-            return _context.Ingredients.Where(u => u.recipe_id == id && u.userName == userName);
+            if (!this._disposed)
+            {
+                if (disposing)
+                {
+                    _context.Dispose();
+                }
+            }
+            this._disposed = true;
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

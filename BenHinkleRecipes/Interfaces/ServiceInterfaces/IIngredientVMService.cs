@@ -5,7 +5,7 @@ namespace BenHinkleRecipes.Interfaces.ServiceInterfaces
 {
     public interface IIngredientVMService
     {
-        List<GroceryListRepoModel> IngredientsToGroceryList(List<IngredientRepoModel> ingredientRepos);
-        GroceryListRepoModel IRMToGRM(IngredientRepoModel ingredientRepoModel);
+        IngredientVM RMtoVM(IngredientRepoModel ingredientRepoModel);
+        IngredientRepoModel VMtoRM(IngredientVM ingredientVM);
     }
 }

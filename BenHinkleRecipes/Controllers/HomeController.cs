@@ -16,12 +16,16 @@ namespace BenHinkleRecipes.Controllers
         private readonly IRecipeService _recipeService;
         private readonly IRecipeVMService _recipeVMService;
         private readonly IUserFavoriteService _userFavoriteService;
+        private readonly IIngredientService _ingredientService;
+        private readonly IIngredientVMService _ingredientVMService;
 
-        public HomeController(IRecipeService recipeService, IRecipeVMService recipeVMService, IUserFavoriteService userFavoriteService)
+        public HomeController(IRecipeService recipeService, IRecipeVMService recipeVMService, IUserFavoriteService userFavoriteService, IIngredientService ingredientService, IIngredientVMService ingredientVMService)
         {
             _recipeVMService = recipeVMService;
             _recipeService = recipeService;
             _userFavoriteService = userFavoriteService;
+            _ingredientService = ingredientService;
+            _ingredientVMService = ingredientVMService;
         }
 
         public IActionResult Index()
@@ -257,9 +261,23 @@ namespace BenHinkleRecipes.Controllers
         public IActionResult AddRecipeIngredient(int id)
         {
             IngredientVM ingredientVM = new IngredientVM();
-            ingredientVM.recipe_id = id;   
+
             ingredientVM.userName = HttpContext.User.Identity.Name;
+            ingredientVM.recipe_id = id;
+
             return View("IngredientAdd", ingredientVM);
+        }
+        [HttpPost]
+        public IActionResult AddRecipeIngredient(IngredientVM ingredientVM)
+        {
+            ingredientVM.userName = HttpContext.User.Identity.Name;
+
+            var ingredientRM = _ingredientVMService.VMtoRM(ingredientVM);
+
+            _ingredientService.InsertIngredient(ingredientRM);
+
+            IngredientVM emptyIngredient = new IngredientVM();
+            return View("IngredientAdd", emptyIngredient);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

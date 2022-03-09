@@ -1,6 +1,7 @@
 ﻿using BenHinkleRecipes.Interfaces.RepoInterfaces;
 using BenHinkleRecipes.Interfaces.ServiceInterfaces;
 using BenHinkleRecipes.Models.RepoModels;
+using BenHinkleRecipes.Models.ViewModels;
 
 namespace BenHinkleRecipes.Services
 {
@@ -18,14 +19,9 @@ namespace BenHinkleRecipes.Services
             return _ingredientRepository.GetRecipeIngredients(id).ToList();
         }
 
-        public IEnumerable<IngredientRepoModel> GetRecipeIngredients(string userName)
+        public void InsertIngredient(IngredientRepoModel ingredientRepo)
         {
-            return _ingredientRepository.GetRecipeIngredients(userName).ToList();
-        }
-
-        public IEnumerable<IngredientRepoModel> GetRecipeIngredients(string userName, int id)
-        {
-            return _ingredientRepository.GetRecipeIngredients(userName, id).ToList();
+           _ingredientRepository.InsertIngredient(ingredientRepo);
         }
     }
 }

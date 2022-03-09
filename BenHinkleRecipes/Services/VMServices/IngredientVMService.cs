@@ -6,30 +6,42 @@ namespace BenHinkleRecipes.Services.VMServices
 {
     public class IngredientVMService : IIngredientVMService
     {
-        public List<GroceryListRepoModel> IngredientsToGroceryList(List<IngredientRepoModel> ingredientRepos)
+        public IngredientVM RMtoVM(IngredientRepoModel ingredientRepoModel)
         {
-            List<GroceryListRepoModel> groceryListRepoModels = new();
+            IngredientVM ingredientVM = new();
 
-            foreach (IngredientRepoModel ingredientRepo in ingredientRepos)
-            {
-                groceryListRepoModels.Add(IRMToGRM(ingredientRepo));
-            }
+            ingredientVM.Name = ingredientRepoModel.Name;
+            ingredientVM.Unit = ingredientRepoModel.Unit;
+            ingredientVM.Quantity = ingredientRepoModel.Quantity;
+            ingredientVM.recipe_id = ingredientRepoModel.recipe_id;
+            ingredientVM.Category = ingredientRepoModel.Category;
+            ingredientVM.userName = ingredientRepoModel.userName;
 
-            return groceryListRepoModels;
+            return ingredientVM;
         }
 
-        public GroceryListRepoModel IRMToGRM(IngredientRepoModel ingredientRepoModel)
+        public IngredientRepoModel VMtoRM(IngredientVM ingredientVM)
         {
-            //Create new VM to take values from the Repo Model
-            GroceryListRepoModel groceryListRepo = new();
+            IngredientRepoModel ingredientRepoModel = new();
 
-            //Assign values from the Repo Model to the VM for displaying
-            groceryListRepo.Name = ingredientRepoModel.Name;
-            groceryListRepo.Category = ingredientRepoModel.Category;
-            groceryListRepo.Quantity = ingredientRepoModel.Quantity;
-            groceryListRepo.Unit = ingredientRepoModel.Unit;
+            ingredientRepoModel.Name = ingredientVM.Name;
+            ingredientRepoModel.Unit = ingredientVM.Unit;
+            ingredientRepoModel.Quantity = ingredientVM.Quantity;
+            ingredientRepoModel.recipe_id = ingredientVM.recipe_id;
+            ingredientRepoModel.Category = ingredientVM.Category;
+            ingredientRepoModel.userName = ingredientVM.userName;
 
-            return groceryListRepo;
+            return ingredientRepoModel;
         }
+        //public List<IngredientVM> RMListToVMList(List<IngredientRepoModel> ingredientRepos)
+        //{
+        //    List<IngredientVM> ingredientVMs = new();
+
+        //    foreach (IngredientRepoModel ingredientRepo in ingredientRepos)
+        //    {
+        //        ingredientVMs.Add(RMtoVM(ingredientRepo));
+        //    }
+        //    return ingredientVMs;
+        //}
     }
 }

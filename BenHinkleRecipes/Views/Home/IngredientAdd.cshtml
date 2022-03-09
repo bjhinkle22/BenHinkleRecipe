@@ -6,14 +6,46 @@
 *@
 @{
 }
- <div class="form-group">
-      <label for="exampleSelect1" class="form-label mt-4">Example select</label>
-      <select class="form-select" id="exampleSelect1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
-      @Html.DisplayFor(m => m.recipe_id)
+
+
+<br />
+<form asp-controller="Home" asp-action="AddRecipeIngredient" method="post">
+    <div class="row">
+        <div class="col-m-2">
+            <label asp-for="Category"></label>
+            <select asp-for="Category" class="form-control">
+                <option>Meat</option>
+                <option>Produce</option>
+                <option>Dairy</option>
+                <option>Herbs</option>
+                <option>Spices</option>
+                <option>Other</option>
+            </select>
+        </div>
+        <br />
+        <div class="col-m-2">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control">
+        </div>
+        <div class="col-m-2">
+            <label asp-for="Unit" class="form-label"></label>
+             <select asp-for="Unit" class="form-control">
+                <option>Ounces</option>
+                <option>lb</option>
+                <option>Item</option>
+                <option>Tablespoons</option>
+                <option>Teaspoons</option>
+                <option>Cups</option>
+            </select>
+        </div>
+        <div class="col-m-2">
+            <label asp-for="Quantity" class="form-label"></label>
+            <input asp-for="Quantity" class="form-control">
+        </div>
+        <input asp-for="recipe_id" hidden>
     </div>
+    <br />
+    <button class="btn btn-success" type="submit">Add Ingredient</button>
+</form>
+<br />
+<input type="button" class="btn btn-secondary" value="Cancel" onclick="location.href='@Url.Action("Index","Home")';" />

@@ -18,7 +18,6 @@ namespace BenHinkleRecipes.Services.VMServices
                 g.Unit = ing.Unit; 
                 g.Quantity = ing.Quantity;
                 g.recipe_id = ing.recipe_id;
-                g.userName = ing.userName;
                 groceryListRepoModels.Add(g);
             }
             return groceryListRepoModels;

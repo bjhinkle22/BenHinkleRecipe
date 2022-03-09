@@ -45,7 +45,10 @@ namespace BenHinkleRecipes.Controllers
 
             var groceryIngredients = _groceryListVMService.RecipeToGroceryListItem(recipeIngredients);
 
-
+            foreach (var item in groceryIngredients)
+            {
+                item.userName = HttpContext.User.Identity.Name;
+            }
 
             var needsUpdate = false;
             if(groceryList.Count > 0)

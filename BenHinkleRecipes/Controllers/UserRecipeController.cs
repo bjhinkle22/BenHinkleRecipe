@@ -10,13 +10,17 @@ namespace BenHinkleRecipes.Controllers
         private readonly IUserRecipeVMService _userRecipeVMService;
         private readonly IUserFavoriteService _userFavoriteService;
         private readonly IUserRecipeService _userRecipeService;
+        private readonly IIngredientService _ingredientService;
+        private readonly IIngredientVMService _ingredientVMService;
 
-        public UserRecipeController(IRecipeService recipeService, IUserFavoriteService userFavoriteService, IUserRecipeService userRecipeService, IUserRecipeVMService userRecipeVMService)
+        public UserRecipeController(IRecipeService recipeService, IUserFavoriteService userFavoriteService, IUserRecipeService userRecipeService, IUserRecipeVMService userRecipeVMService, IIngredientVMService ingredientVMService, IIngredientService ingredientService = null)
         {
             _recipeService = recipeService;
             _userFavoriteService = userFavoriteService;
             _userRecipeService = userRecipeService;
             _userRecipeVMService = userRecipeVMService;
+            _ingredientVMService = ingredientVMService;
+            _ingredientService = ingredientService;
         }
         public IActionResult Index()
         {
@@ -78,6 +82,13 @@ namespace BenHinkleRecipes.Controllers
                     recipeResult.IsFavorite = true;
                 }
             }
+            //get recipe ingredients
+            var ingredients = _ingredientService.GetRecipeIngredients(recipeResult.RecipeId).ToList();
+
+            var ingredientVMs = _ingredientVMService.RMListToVMList(ingredients);
+
+            recipeResult.Ingredients = ingredientVMs;
+
             return View("_UserRecipeDetails", recipeResult);
         }
         [HttpGet]

@@ -77,6 +77,13 @@ namespace BenHinkleRecipes.Controllers
             //Get current username check null, return All Recipes without doing work if null.
             var userName = HttpContext.User.Identity.Name;
 
+            //get recipe ingredients
+            var ingredients = _ingredientService.GetRecipeIngredients(id).ToList();
+
+            var ingredientVMs = _ingredientVMService.RMListToVMList(ingredients);
+
+            recipeResult.Ingredients = ingredientVMs;
+
             if (userName == null)
             {
                 return View("_RecipeDetails", recipeResult);
@@ -95,6 +102,7 @@ namespace BenHinkleRecipes.Controllers
                     recipeResult.IsFavorite = true;
                 }
             }
+
             return View("_RecipeDetails", recipeResult);
         }
 

@@ -7,5 +7,6 @@ namespace BenHinkleRecipes.Interfaces.ServiceInterfaces
     {
         IngredientVM RMtoVM(IngredientRepoModel ingredientRepoModel);
         IngredientRepoModel VMtoRM(IngredientVM ingredientVM);
+        List<IngredientVM> RMListToVMList(List<IngredientRepoModel> ingredientRepos);
     }
 }

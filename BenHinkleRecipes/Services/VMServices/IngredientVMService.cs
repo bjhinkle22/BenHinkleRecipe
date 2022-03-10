@@ -33,15 +33,15 @@ namespace BenHinkleRecipes.Services.VMServices
 
             return ingredientRepoModel;
         }
-        //public List<IngredientVM> RMListToVMList(List<IngredientRepoModel> ingredientRepos)
-        //{
-        //    List<IngredientVM> ingredientVMs = new();
+        public List<IngredientVM> RMListToVMList(List<IngredientRepoModel> ingredientRepos)
+        {
+            List<IngredientVM> ingredientVMs = new();
 
-        //    foreach (IngredientRepoModel ingredientRepo in ingredientRepos)
-        //    {
-        //        ingredientVMs.Add(RMtoVM(ingredientRepo));
-        //    }
-        //    return ingredientVMs;
-        //}
+            foreach (IngredientRepoModel ingredientRepo in ingredientRepos)
+            {
+                ingredientVMs.Add(RMtoVM(ingredientRepo));
+            }
+            return ingredientVMs;
+        }
     }
 }

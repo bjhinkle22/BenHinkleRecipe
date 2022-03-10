@@ -27,5 +27,6 @@ namespace BenHinkleRecipes.Models.ViewModels
         public byte[]? OriginalRecipeFront { get; set; }
         [HiddenInput]
         public byte[]? OriginalRecipeBack { get; set; }
+        public List<IngredientVM> Ingredients { get; set;}
     }
 }

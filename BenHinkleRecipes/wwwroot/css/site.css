@@ -17,11 +17,22 @@ html {
     font-size: 16px;
   }
 }
-
 @media only screen and (max-width: 450px) {
-    #accordionExample{
-        margin-top:2rem;
+    #accordionExample {
+        margin-top: 2rem;
     }
+
+    h5#accordionTitle {
+        margin-top: 12rem;
+    }
+}
+
+
+@media only screen and (min-width: 750px) {
+    #accordionExample {
+        margin-top: 2rem;
+    }
+
     h5#accordionTitle {
         margin-top: 5rem;
     }

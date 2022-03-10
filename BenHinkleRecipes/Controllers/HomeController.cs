@@ -120,7 +120,7 @@ namespace BenHinkleRecipes.Controllers
 
             if (userName == null)
             {
-                return View("_RecipeDetails", recipeResult);
+                return View("_RecipeDetailsFront", recipeResult);
             }
             //Get Current User List of Favorites
             var userFavorites = _userFavoriteService.GetFavoriteRecipes(userName);

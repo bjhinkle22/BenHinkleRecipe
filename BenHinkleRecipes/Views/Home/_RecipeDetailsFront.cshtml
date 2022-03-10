@@ -13,6 +13,7 @@
             <h5 id="recipeCardsTitle" class="card-title">@Model.RecipeName</h5>
             <p id="recipeCardsDescription" class="card-text">@Model.Description</p>
             <br />
+            @Html.ActionLink("View Back of Recipe Card","GetRecipeById", "Home", new { id = @Model.RecipeId }, new { @class="btn btn-info"})
             @if (ViewContext.HttpContext.User.Identity.Name != null)
             {
                 <input asp-for="@Model.IsFavorite" type="checkbox" class=star onclick="UpdateRecipe(this)" data-recipeid="@Model.RecipeId">
@@ -21,7 +22,6 @@
                 <div class="btn-group" role="group" aria-label="Basic example">
                     @Html.ActionLink("Add to My Recipes","InsertUserRecipe", "UserRecipe", new { id = @Model.RecipeId }, new { @class="btn btn-success"})
                     @Html.ActionLink("Add to Grocery List","AddToGroceryList", "GroceryList", new { id = @Model.RecipeId }, new { @class="btn btn-primary"})
-                    @Html.ActionLink("View Back of Recipe Card","GetRecipeById", "Home", new { id = @Model.RecipeId }, new { @class="btn btn-info"})
                     @if (ViewContext.HttpContext.User.Identity.Name == "bjhinkle22@gmail.com")
                     {
                         @Html.ActionLink("Add Ingredients","AddRecipeIngredient", "Home", new { id = @Model.RecipeId }, new { @class="btn btn-warning"})

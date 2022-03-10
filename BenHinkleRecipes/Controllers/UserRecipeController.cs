@@ -114,6 +114,14 @@ namespace BenHinkleRecipes.Controllers
                     recipeResult.IsFavorite = true;
                 }
             }
+
+            //get recipe ingredients
+            var ingredients = _ingredientService.GetRecipeIngredients(id).ToList();
+
+            var ingredientVMs = _ingredientVMService.RMListToVMList(ingredients);
+
+            recipeResult.Ingredients = ingredientVMs;
+
             return View("_UserRecipeFrontDetails", recipeResult);
         }
 

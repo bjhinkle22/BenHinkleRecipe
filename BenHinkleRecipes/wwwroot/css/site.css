@@ -18,6 +18,15 @@ html {
   }
 }
 
+@media only screen and (max-width: 450px) {
+    #accordionExample{
+        margin-top:2rem;
+    }
+    h5#accordionTitle {
+        margin-top: 5rem;
+    }
+}
+
 html {
   position: relative;
   min-height: 100%;

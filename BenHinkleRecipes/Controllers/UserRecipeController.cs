@@ -177,6 +177,13 @@ namespace BenHinkleRecipes.Controllers
             //Convert updated RM to VM
             var recipeResult = _userRecipeVMService.RMtoVM(updatedRecipe);
 
+            //get recipe ingredients
+            var ingredients = _ingredientService.GetRecipeIngredients(request.RecipeId).ToList();
+
+            var ingredientVMs = _ingredientVMService.RMListToVMList(ingredients);
+
+            recipeResult.Ingredients = ingredientVMs;
+
             //Assign Favorties to VMs
             if (request.IsFavorite == true && HttpContext.User.Identity.Name != null)
             {

@@ -35,7 +35,8 @@ builder.Services.ConfigureApplicationCookie(o => {
 });
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<DataContext>();builder.Services.AddDbContext<DataContext>(options =>
+    .AddEntityFrameworkStores<DataContext>();
+builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();
 

@@ -9,7 +9,9 @@
 }
 
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -36,11 +38,6 @@ html {
     h5#accordionTitle {
         margin-top: 5rem;
     }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
 }
 
 body {
@@ -81,9 +78,7 @@ body {
     -webkit-line-clamp: 5; /* number of lines to show */
     -webkit-box-orient: vertical;
 }
-.text {
-   
-}
+
 #recipeCardsTitle {
     text-decoration-color:#fff;
 }

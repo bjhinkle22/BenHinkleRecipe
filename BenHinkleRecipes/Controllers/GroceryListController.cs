@@ -6,21 +6,15 @@ namespace BenHinkleRecipes.Controllers
 {
     public class GroceryListController : Controller
     {
-        private readonly IRecipeService _recipeService;
-        private readonly IUserRecipeService _userRecipeService;
         private readonly IGroceryListService _groceryListService;
         private readonly IGroceryListVMService _groceryListVMService;
         private readonly IIngredientService _ingredientService;
-        private readonly IIngredientVMService _ingredientVMService;
 
-        public GroceryListController(IGroceryListService groceryListService, IRecipeService recipeService, IGroceryListVMService groceryListVMService, IUserRecipeService userRecipeService, IIngredientService ingredientService, IIngredientVMService ingredientVMService)
+        public GroceryListController(IGroceryListService groceryListService, IGroceryListVMService groceryListVMService, IIngredientService ingredientService)
         {
             _groceryListService = groceryListService;
-            _recipeService = recipeService;
             _groceryListVMService = groceryListVMService;
-            _userRecipeService = userRecipeService;
             _ingredientService = ingredientService;
-            _ingredientVMService = ingredientVMService;
         }
         public IActionResult Index()
         {

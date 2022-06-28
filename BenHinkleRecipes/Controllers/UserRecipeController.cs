@@ -151,7 +151,6 @@ namespace BenHinkleRecipes.Controllers
             //Adding IsFavorite to Appropriate Recipes
             for (int i = 0; i < favorites.Count; i++)
             {
-                int test = favorites[i];
                 if (recipeResult.RecipeId == favorites[i])
                 {
                     recipeResult.IsFavorite = true;

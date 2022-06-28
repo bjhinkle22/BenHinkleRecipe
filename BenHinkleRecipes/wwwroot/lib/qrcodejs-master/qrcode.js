@@ -69,7 +69,7 @@ var QRCode;
 			return this.parsedData.length;
 		},
 		write: function (buffer) {
-			for (var i = 0, l = this.parsedData.length; i < l; i++) {
+			for (let i = 0, l = this.parsedData.length; i < l; i++) {
 				buffer.put(this.parsedData[i], 8);
 			}
 		}
@@ -133,7 +133,7 @@ var QRCode;
 	var ratio=Math.abs(100*darkCount/moduleCount/moduleCount-50)/5;lostPoint+=ratio*10;return lostPoint;}};var QRMath={glog:function(n){if(n<1){throw new Error("glog("+n+")");}
 	return QRMath.LOG_TABLE[n];},gexp:function(n){while(n<0){n+=255;}
 	while(n>=256){n-=255;}
-	return QRMath.EXP_TABLE[n];},EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)};for(var i=0;i<8;i++){QRMath.EXP_TABLE[i]=1<<i;}
+	return QRMath.EXP_TABLE[n];},EXP_TABLE:new Array(256),LOG_TABLE:new Array(256)};for(let i=0;i<8;i++){QRMath.EXP_TABLE[i]=1<<i;}
 	for(var i=8;i<256;i++){QRMath.EXP_TABLE[i]=QRMath.EXP_TABLE[i-4]^QRMath.EXP_TABLE[i-5]^QRMath.EXP_TABLE[i-6]^QRMath.EXP_TABLE[i-8];}
 	for(var i=0;i<255;i++){QRMath.LOG_TABLE[QRMath.EXP_TABLE[i]]=i;}
 	function QRPolynomial(num,shift){if(num.length==undefined){throw new Error(num.length+"/"+shift);}
@@ -182,7 +182,7 @@ var QRCode;
 		Drawing.prototype.draw = function (oQRCode) {
 			var _htOption = this._htOption;
 			var _el = this._el;
-			var nCount = oQRCode.getModuleCount();
+			let nCount = oQRCode.getModuleCount();
 			var nWidth = Math.floor(_htOption.width / nCount);
 			var nHeight = Math.floor(_htOption.height / nCount);
 
@@ -285,8 +285,8 @@ var QRCode;
 	    	var factor = 1 / window.devicePixelRatio;
 	        var drawImage = CanvasRenderingContext2D.prototype.drawImage; 
 	    	CanvasRenderingContext2D.prototype.drawImage = function (image, sx, sy, sw, sh, dx, dy, dw, dh) {
-	    		if (("nodeName" in image) && /img/i.test(image.nodeName)) {
-		        	for (var i = arguments.length - 1; i >= 1; i--) {
+				if (("nodeName" in image) && /img/i.test(image.nodeName)) {
+					for (let i = arguments.length - 1; i >= 1; i--) {
 		            	arguments[i] = arguments[i] * factor;
 		        	}
 	    		} else if (typeof dw == "undefined") {
@@ -390,7 +390,7 @@ var QRCode;
 			for (var row = 0; row < nCount; row++) {
 				for (var col = 0; col < nCount; col++) {
 					var bIsDark = oQRCode.isDark(row, col);
-					var nLeft = col * nWidth;
+					let nLeft = col * nWidth;
 					var nTop = row * nHeight;
 					_oContext.strokeStyle = bIsDark ? _htOption.colorDark : _htOption.colorLight;
 					_oContext.lineWidth = 1;

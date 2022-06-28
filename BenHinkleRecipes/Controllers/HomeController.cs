@@ -1,13 +1,9 @@
 ﻿using BenHinkleRecipes.Interfaces.ServiceInterfaces;
 using BenHinkleRecipes.Models;
 using BenHinkleRecipes.Models.ViewModels;
-using BenHinkleRecipes.Services.VMServices;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Diagnostics;
-using System;
-using Microsoft.AspNetCore.Identity;
-using BenHinkleRecipes.Models.RepoModels;
 
 namespace BenHinkleRecipes.Controllers
 {
@@ -205,7 +201,6 @@ namespace BenHinkleRecipes.Controllers
             //Adding IsFavorite to Appropriate Recipes
             for (int i = 0; i < favorites.Count; i++)
             {
-                int test = favorites[i];
                 if (recipeResult.RecipeId == favorites[i])
                 {
                     recipeResult.IsFavorite = true;
@@ -284,7 +279,6 @@ namespace BenHinkleRecipes.Controllers
             {
                 for (int i = 0; i < favorites.Count; i++)
                 {
-                    int test = favorites[i];
                     if (recipe.RecipeId == favorites[i])
                     {
                         recipe.IsFavorite = true;

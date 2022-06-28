@@ -68,10 +68,7 @@ namespace BenHinkleRecipes.Controllers
                     }
                 }
             }
-            if(needsUpdate == false)
-            {
-                _groceryListService.InsertGroceryListItem(groceryIngredients);
-            }
+            _groceryListService.InsertGroceryListItem(groceryIngredients);
 
             var groceryListReturn = _groceryListService.GetGroceryListItems(HttpContext.User.Identity.Name).ToList();
 

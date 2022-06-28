@@ -15,7 +15,8 @@ namespace BenHinkleRecipes.Controllers
         private readonly IIngredientService _ingredientService;
         private readonly IIngredientVMService _ingredientVMService;
 
-        public HomeController(IRecipeService recipeService, IRecipeVMService recipeVMService, IUserFavoriteService userFavoriteService, IIngredientService ingredientService, IIngredientVMService ingredientVMService)
+        public HomeController(IRecipeService recipeService, IRecipeVMService recipeVMService, 
+            IUserFavoriteService userFavoriteService, IIngredientService ingredientService, IIngredientVMService ingredientVMService)
         {
             _recipeVMService = recipeVMService;
             _recipeService = recipeService;

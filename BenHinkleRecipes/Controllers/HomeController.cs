@@ -243,9 +243,11 @@ namespace BenHinkleRecipes.Controllers
                 _userFavoriteService.UpdateFavorite(request.RecipeId, request.IsFavorite, HttpContext.User.Identity.Name);
                 recipeResult.IsFavorite = false;
             }
-
+            else
+            {
+                return View("_RecipeDetails", recipeResult);
+            }
             return View("_RecipeDetails", recipeResult);
-
         }
 
         [HttpPost]

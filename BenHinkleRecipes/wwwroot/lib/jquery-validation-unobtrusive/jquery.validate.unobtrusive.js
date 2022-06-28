@@ -18,7 +18,7 @@
         jQuery.validator.unobtrusive = factory(jQuery);
     }
 }(function ($) {
-    var $jQval = $.validator,
+    let $jQval = $.validator,
         adapters,
         data_validation = "unobtrusiveValidation";
 
@@ -50,7 +50,7 @@
     }
 
     function onError(error, inputElement) {  // 'this' is the form element
-        var container = $(this).find("[data-valmsg-for='" + escapeAttributeValue(inputElement[0].name) + "']"),
+        let container = $(this).find("[data-valmsg-for='" + escapeAttributeValue(inputElement[0].name) + "']"),
             replaceAttrValue = container.attr("data-valmsg-replace"),
             replace = replaceAttrValue ? $.parseJSON(replaceAttrValue) !== false : null;
 
@@ -67,7 +67,7 @@
     }
 
     function onErrors(event, validator) {  // 'this' is the form element
-        var container = $(this).find("[data-valmsg-summary=true]"),
+        let container = $(this).find("[data-valmsg-summary=true]"),
             list = container.find("ul");
 
         if (list && list.length && validator.errorList.length) {

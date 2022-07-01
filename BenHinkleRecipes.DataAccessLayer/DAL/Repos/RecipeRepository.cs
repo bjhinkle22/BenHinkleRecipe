@@ -2,20 +2,29 @@
 using BenHinkleRecipes.DataAccessLayer.Interfaces.RepoInterfaces;
 using BenHinkleRecipes.DataAccessLayer.Models.RepoModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
+using System;
 
 namespace BenHinkleRecipes.DataAccessLayer.Repos
 {
     public class RecipeRepository : IRecipeRepository, IDisposable
     {
         private readonly DataContext _context;
-        public RecipeRepository(DataContext context)
+        private readonly IMemoryCache _memoryCache;
+        public RecipeRepository(DataContext context, IMemoryCache memoryCache)
         {
             _context = context;
+            _memoryCache = memoryCache;
         }
         public async Task<IEnumerable<RecipeRepoModel>> GetRecipesAsync()
         {
-            var recipes = await _context.Recipes.ToListAsync();
-            return recipes;
+            var output = _memoryCache.Get<List<RecipeRepoModel>>("recipes");
+            if (output is null)
+            {
+                output = await _context.Recipes.ToListAsync();
+                _memoryCache.Set("recipes", output, TimeSpan.FromDays(7));
+            }
+            return output;
         }
         public RecipeRepoModel GetRecipe(int id)
         {

@@ -1,6 +1,6 @@
-using BenHinkleRecipes.DAL.Context;
-using BenHinkleRecipes.DAL.Repos;
-using BenHinkleRecipes.Interfaces.RepoInterfaces;
+using BenHinkleRecipes.DataAccessLayer.Context;
+using BenHinkleRecipes.DataAccessLayer.Repos;
+using BenHinkleRecipes.DataAccessLayer.Interfaces.RepoInterfaces;
 using BenHinkleRecipes.Interfaces.ServiceInterfaces;
 using BenHinkleRecipes.Services;
 using BenHinkleRecipes.Services.VMServices;

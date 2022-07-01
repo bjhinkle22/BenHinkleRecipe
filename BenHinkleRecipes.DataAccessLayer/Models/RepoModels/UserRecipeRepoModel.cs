@@ -1,15 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BenHinkleRecipes.Models.RepoModels
+namespace BenHinkleRecipes.DataAccessLayer.Models.RepoModels
 {
-    public class RecipeRepoModel
+    public class UserRecipeRepoModel
     {
-        public int Id { get; set; }
+        [Key]
+        public int UserRecipe_ID { get; set; }
+        public int recipe_id { get; set; }
         public string? RecipeName { get; set; }
         public string? Description { get; set; }
         [MaxLength]
         public byte[]? RecipePhotoFront { get; set; }
         [MaxLength]
         public byte[]? RecipePhotoBack { get; set; }
+        public string userName { get; set; }
     }
 }

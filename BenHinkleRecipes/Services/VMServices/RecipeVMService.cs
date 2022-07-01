@@ -1,5 +1,5 @@
 ﻿using BenHinkleRecipes.Interfaces.ServiceInterfaces;
-using BenHinkleRecipes.Models.RepoModels;
+using BenHinkleRecipes.DataAccessLayer.Models.RepoModels;
 using BenHinkleRecipes.Models.ViewModels;
 
 namespace BenHinkleRecipes.Services.VMServices

@@ -1,6 +1,6 @@
-﻿using BenHinkleRecipes.Models.RepoModels;
+﻿using BenHinkleRecipes.DataAccessLayer.Models.RepoModels;
 
-namespace BenHinkleRecipes.Interfaces.RepoInterfaces
+namespace BenHinkleRecipes.DataAccessLayer.Interfaces.RepoInterfaces
 {
     public interface IRecipeRepository : IDisposable
     {

@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace BenHinkleRecipes.Models.RepoModels
+namespace BenHinkleRecipes.DataAccessLayer.Models.RepoModels
 {
     public class IngredientRepoModel
     {

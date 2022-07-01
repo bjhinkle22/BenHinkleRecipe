@@ -1,6 +1,8 @@
 name: Build and deploy .NET Core app to Windows WebApp BenHinkleRecipes
 on:
   pull_request:
+    types:
+      - closed
     branches:
     - master
 env:

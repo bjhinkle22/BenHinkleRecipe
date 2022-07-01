@@ -4,11 +4,10 @@ namespace BenHinkleRecipes.Interfaces.ServiceInterfaces
 {
     public interface IRecipeService
     {
-        List<RecipeRepoModel> GetRecipes();
+        Task<List<RecipeRepoModel>> GetRecipesAsync();
         RecipeRepoModel GetRecipe(int id);
         RecipeRepoModel InsertRecipe(RecipeRepoModel recipe);
         RecipeRepoModel UpdateRecipe(RecipeRepoModel recipe);
         void DeleteRecipe(int id);
-
     }
 }

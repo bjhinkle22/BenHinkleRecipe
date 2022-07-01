@@ -12,9 +12,10 @@ namespace BenHinkleRecipes.DAL.Repos
         {
             _context = context;
         }
-        public IEnumerable<RecipeRepoModel> GetRecipes()
+        public async Task<IEnumerable<RecipeRepoModel>> GetRecipesAsync()
         {
-            return _context.Recipes.ToList();
+            var recipes = await _context.Recipes.ToListAsync();
+            return recipes;
         }
         public RecipeRepoModel GetRecipe(int id)
         {

@@ -38,6 +38,7 @@ builder.Services.AddDbContext<DataContext>(options =>
     .AddEntityFrameworkStores<DataContext>();
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddMemoryCache();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

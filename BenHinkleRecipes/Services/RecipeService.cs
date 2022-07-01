@@ -12,10 +12,10 @@ namespace BenHinkleRecipes.Services
         {
             _recipeRepo = recipeRepo;
         }
-        public List<RecipeRepoModel> GetRecipes()
+        public async Task<List<RecipeRepoModel>> GetRecipesAsync()
         {
-            List<RecipeRepoModel> recipes = _recipeRepo.GetRecipes().ToList();
-            return recipes;
+            var recipes = await _recipeRepo.GetRecipesAsync();
+            return recipes.ToList();
         }
         public RecipeRepoModel GetRecipe(int id)
         {

@@ -25,10 +25,10 @@ namespace BenHinkleRecipes.Controllers
             _ingredientVMService = ingredientVMService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             //Get All Recipes
-            var allRecipes = _recipeService.GetRecipes();
+            var allRecipes = await _recipeService.GetRecipesAsync();
 
             //Convert List of Repo Models to  List of ViewModels
             var recipeResponse = _recipeVMService.RMListToVMList(allRecipes);
@@ -273,8 +273,8 @@ namespace BenHinkleRecipes.Controllers
 
             List<int> favorites = userFavorites.Select(x => x.recipe_id).ToList();
 
-            var allRecipes = _recipeService.GetRecipes();
-            var recipeResponse = _recipeVMService.RMListToVMList(allRecipes);
+            var allRecipes = _recipeService.GetRecipesAsync();
+            var recipeResponse = _recipeVMService.RMListToVMList(allRecipes.Result);
 
             var favoriteRecipes = new List<RecipeVM>();
 

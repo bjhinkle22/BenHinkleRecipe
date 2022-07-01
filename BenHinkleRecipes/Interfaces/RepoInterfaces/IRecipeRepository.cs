@@ -4,7 +4,7 @@ namespace BenHinkleRecipes.Interfaces.RepoInterfaces
 {
     public interface IRecipeRepository : IDisposable
     {
-        IEnumerable<RecipeRepoModel> GetRecipes();
+        Task<IEnumerable<RecipeRepoModel>> GetRecipesAsync();
         RecipeRepoModel GetRecipe(int id);
         void InsertRecipe(RecipeRepoModel recipe);
         void DeleteRecipe(int id);

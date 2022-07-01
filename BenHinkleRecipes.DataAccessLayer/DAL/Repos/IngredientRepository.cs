@@ -1,9 +1,8 @@
-﻿using BenHinkleRecipes.DAL.Context;
-using BenHinkleRecipes.Interfaces.RepoInterfaces;
-using BenHinkleRecipes.Models.RepoModels;
-using BenHinkleRecipes.Models.ViewModels;
+﻿using BenHinkleRecipes.DataAccessLayer.Context;
+using BenHinkleRecipes.DataAccessLayer.Interfaces.RepoInterfaces;
+using BenHinkleRecipes.DataAccessLayer.Models.RepoModels;
 
-namespace BenHinkleRecipes.DAL.Repos
+namespace BenHinkleRecipes.DataAccessLayer.Repos
 {
     public class IngredientRepository : IIngredientRepository
     {

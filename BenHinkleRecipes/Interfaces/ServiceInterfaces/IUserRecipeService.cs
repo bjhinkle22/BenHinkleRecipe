@@ -1,4 +1,4 @@
-﻿using BenHinkleRecipes.Models.RepoModels;
+﻿using BenHinkleRecipes.DataAccessLayer.Models.RepoModels;
 
 namespace BenHinkleRecipes.Interfaces.ServiceInterfaces
 {

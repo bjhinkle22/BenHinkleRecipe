@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BenHinkleRecipes.Models.RepoModels
+namespace BenHinkleRecipes.DataAccessLayer.Models.RepoModels
 {
     public class UserFavoriteRepoModel
     {

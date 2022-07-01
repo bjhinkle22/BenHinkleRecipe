@@ -1,8 +1,8 @@
-﻿using BenHinkleRecipes.Models.RepoModels;
+﻿using BenHinkleRecipes.DataAccessLayer.Models.RepoModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace BenHinkleRecipes.DAL.Context
+namespace BenHinkleRecipes.DataAccessLayer.Context
 {
     public class DataContext : IdentityDbContext
     {

@@ -1,7 +1,7 @@
-﻿using BenHinkleRecipes.Models.RepoModels;
-using BenHinkleRecipes.Models.ViewModels;
+﻿using BenHinkleRecipes.DataAccessLayer.Models.RepoModels;
 
-namespace BenHinkleRecipes.Interfaces.RepoInterfaces
+
+namespace BenHinkleRecipes.DataAccessLayer.Interfaces.RepoInterfaces
 {
     public interface IIngredientRepository
     {

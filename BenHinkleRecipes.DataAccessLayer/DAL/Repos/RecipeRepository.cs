@@ -1,9 +1,9 @@
-﻿using BenHinkleRecipes.DAL.Context;
-using BenHinkleRecipes.Interfaces.RepoInterfaces;
-using BenHinkleRecipes.Models.RepoModels;
+﻿using BenHinkleRecipes.DataAccessLayer.Context;
+using BenHinkleRecipes.DataAccessLayer.Interfaces.RepoInterfaces;
+using BenHinkleRecipes.DataAccessLayer.Models.RepoModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace BenHinkleRecipes.DAL.Repos
+namespace BenHinkleRecipes.DataAccessLayer.Repos
 {
     public class RecipeRepository : IRecipeRepository, IDisposable
     {

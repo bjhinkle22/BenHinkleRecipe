@@ -1,6 +1,6 @@
-﻿using BenHinkleRecipes.Interfaces.RepoInterfaces;
+﻿using BenHinkleRecipes.DataAccessLayer.Interfaces.RepoInterfaces;
 using BenHinkleRecipes.Interfaces.ServiceInterfaces;
-using BenHinkleRecipes.Models.RepoModels;
+using BenHinkleRecipes.DataAccessLayer.Models.RepoModels;
 
 namespace BenHinkleRecipes.Services
 {
